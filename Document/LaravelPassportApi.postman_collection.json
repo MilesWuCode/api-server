@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "1cfbd72d-e7fd-4400-85f3-764faae49616",
+		"name": "LaravelPassportApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "註冊",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "miles",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "miles@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "comfirm_password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "寄驗證信",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "miles@email.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/user/send-verify-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"send-verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "驗證信箱",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "hash",
+									"value": "5149e06d1186903f2e5a7c6847678bf5395df09f",
+									"type": "text"
+								},
+								{
+									"key": "expires",
+									"value": "1637649815",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/user/verify-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Access Token (登入)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "ure8rTqUzxyFPJorSxSeBTvVimhDbJJ9VYdHFMH9",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "miles@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "*",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "ure8rTqUzxyFPJorSxSeBTvVimhDbJJ9VYdHFMH9",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "def5020016238e4814263b2e619a324e404e932f3ff51a8a18733c021f4994f0710a8b8d1dd2fd1a12de04ae0d256eb6ad9ee9fb43ab33244561c87e5839b506381ed371ee644d572fd1ecdca2ede6e8d7092a774f12b661ad34b82654bceb7ec5070aa3cd4367fd3590bdb8148f8c3adad2cff42653c66af93c9491de47423052fc74e9ad03c47d665e382e09fb854ef67597f480053b412d9754c00e32404b41ede08ba94140a4b67aead2a672240711de8145214bf263c3b35b121784a037168fec8873084c0d55a13da2ef47fe939dbdc156cff9108459388352cae40d90f8b2d218da6519c9234aac117401ce18192b6b5a5978f49a0e5bccaa7efc2e4996daff555f3d3a1ccdb9c6c180dbfa77c6cf68644ae226ba65ce63e4f4d2bf12e598b7a327bc3ee61443fd44c446d51892e6451cb62b6c9b89a6db676fa52d5916956d4ea604e4a1fe88c81be4a9ce52951fe081d09f22eb149fb142468718ee9aae803a\n",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "會員資料",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiOGE5MmE1MTExZTU4MDE5MzFhMmYyNTkxYjM2NzQxNjQ1NmZiMWI3YjZlODUwNzFlYWMwM2I2NzEzYzk3ZjJmZmVmZTFmMjRmNWVlYzU2MDEiLCJpYXQiOjE2Mzc2NDYzMjQuMzIxNDA1LCJuYmYiOjE2Mzc2NDYzMjQuMzIxNDE1LCJleHAiOjE2NjkxODIzMjQuMzIwOTQ3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.UkLJncBam6bb2hHdHBZtgviYtyL-ElBf3wumrzotyx60g9vBO82R40S1gRDmE6azGLNekWiOH80QEGvgStVxCqvjMMdePhdRStGaxE4nhIMkMVBz2rjjmww1OWTr580HgWZysuVTsBS0d-hADdfQSkr0K9Ag0-933SjtW0FzdoilrcA6SApSNuY67dLFG6s425tekQYrnL04jdDKY2qTVpFWv6gfwnEb5xUShl1qqSV2DKWTTjPnaUqRaPsUiyTRazSwY-OMFOBM5EWIJT1q5F-f6U_Zj1M0ncXtGNmEfi7YkKr3tTc2s0-pSujHsf9JkkDDnY3kgYPJQelMZHMx9-56OzxAN73U4b1goE7X65SgzL-vHmfJHOQqT2mpH-abseTe_YAWuTeHqSDUiRPmfSxuJCmIqDR8qRWPuuYKpGetE7oy4g-y6QHxpL4cUzaK99l-bmOov7f8DRaSNhTpqqhrdTvsPbHdcVNatCoDqa6rjfWN4ismxfHn3BihD0NOXLVjYpbtdrsPhXulNapwD5maaFARNIY8ZmfGSbm29G9zjAwYyv06BeUN274IaCArxIDon6SSS6FBQh2VQDDWRNzHKQXGgsN-cSVTvLomJjEj8tljuM7ctNZJKxiSG5Jxg3s-x02zVaarzOP0D4zWlzDUzjVo03Ox94UdDEEEshw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "登出",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiOGE5MmE1MTExZTU4MDE5MzFhMmYyNTkxYjM2NzQxNjQ1NmZiMWI3YjZlODUwNzFlYWMwM2I2NzEzYzk3ZjJmZmVmZTFmMjRmNWVlYzU2MDEiLCJpYXQiOjE2Mzc2NDYzMjQuMzIxNDA1LCJuYmYiOjE2Mzc2NDYzMjQuMzIxNDE1LCJleHAiOjE2NjkxODIzMjQuMzIwOTQ3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.UkLJncBam6bb2hHdHBZtgviYtyL-ElBf3wumrzotyx60g9vBO82R40S1gRDmE6azGLNekWiOH80QEGvgStVxCqvjMMdePhdRStGaxE4nhIMkMVBz2rjjmww1OWTr580HgWZysuVTsBS0d-hADdfQSkr0K9Ag0-933SjtW0FzdoilrcA6SApSNuY67dLFG6s425tekQYrnL04jdDKY2qTVpFWv6gfwnEb5xUShl1qqSV2DKWTTjPnaUqRaPsUiyTRazSwY-OMFOBM5EWIJT1q5F-f6U_Zj1M0ncXtGNmEfi7YkKr3tTc2s0-pSujHsf9JkkDDnY3kgYPJQelMZHMx9-56OzxAN73U4b1goE7X65SgzL-vHmfJHOQqT2mpH-abseTe_YAWuTeHqSDUiRPmfSxuJCmIqDR8qRWPuuYKpGetE7oy4g-y6QHxpL4cUzaK99l-bmOov7f8DRaSNhTpqqhrdTvsPbHdcVNatCoDqa6rjfWN4ismxfHn3BihD0NOXLVjYpbtdrsPhXulNapwD5maaFARNIY8ZmfGSbm29G9zjAwYyv06BeUN274IaCArxIDon6SSS6FBQh2VQDDWRNzHKQXGgsN-cSVTvLomJjEj8tljuM7ctNZJKxiSG5Jxg3s-x02zVaarzOP0D4zWlzDUzjVo03Ox94UdDEEEshw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Todo",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/api/todo?page=1&limit=2&sort=idDesc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "idDesc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "abc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/todo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"todo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/api/todo/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"todo",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "active",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/todo/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"todo",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/todo/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"todo",
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
