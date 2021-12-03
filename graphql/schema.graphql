@@ -49,4 +49,9 @@ type Mutation {
         @update(model: "App\\Models\\Todo")
         @guard
         @can(ability: "update", model: "App\\Models\\Todo", query: true)
+
+    deleteTodo(id: ID!): Todo
+        @delete(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "delete", model: "App\\Models\\Todo", query: true)
 }
