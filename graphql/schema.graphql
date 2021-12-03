@@ -2,13 +2,8 @@
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
-scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
-
-type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
-    me: User! @auth @guard
-}
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type User {
     id: ID!
@@ -16,4 +11,42 @@ type User {
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
+    todos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
+        @hasMany(type: "paginator", relation: "todos")
+}
+
+type Todo {
+    id: ID!
+    user: User! @belongsTo(relation: "user")
+    content: String!
+    active: Boolean!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+    me: User! @auth @guard
+    todo(id: ID @eq): Todo @find
+}
+
+type Mutation {
+    createTodo(
+        content: String! @rules(apply: ["required", "string", "max:100"])
+    ): Todo
+        @create(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "create")
+        @inject(context: "user.id", name: "user_id")
+
+    updateTodo(
+        id: ID! @eq
+        content: String
+            @rules(apply: ["sometimes", "required", "string", "max:100"])
+        active: Boolean @rules(apply: ["sometimes", "required", "boolean"])
+    ): Todo
+        @update(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "update", model: "App\\Models\\Todo", query: true)
 }

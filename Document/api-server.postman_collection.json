@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "1cfbd72d-e7fd-4400-85f3-764faae49616",
-		"name": "LaravelPassportApi",
+		"_postman_id": "3e8ad88d-3958-4cd1-afba-3d960635c822",
+		"name": "api-server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -10,6 +10,17 @@
 			"item": [
 				{
 					"name": "註冊",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -48,10 +59,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/api/user/register",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/user/register",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -152,6 +163,23 @@
 				},
 				{
 					"name": "Access Token (登入)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const {token_type, access_token, refresh_token} = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable('token_type', token_type);",
+									"",
+									"postman.setEnvironmentVariable('access_token', access_token);",
+									"",
+									"postman.setEnvironmentVariable('refresh_token', refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -174,12 +202,12 @@
 								},
 								{
 									"key": "client_id",
-									"value": "2",
+									"value": "{{client_id}}",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
-									"value": "ure8rTqUzxyFPJorSxSeBTvVimhDbJJ9VYdHFMH9",
+									"value": "{{client_secret}}",
 									"type": "text"
 								},
 								{
@@ -200,10 +228,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/oauth/token",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/oauth/token",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"oauth",
@@ -215,6 +243,23 @@
 				},
 				{
 					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const {token_type, access_token, refresh_token} = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable('token_type', token_type);",
+									"",
+									"postman.setEnvironmentVariable('access_token', access_token);",
+									"",
+									"postman.setEnvironmentVariable('refresh_token', refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -237,17 +282,17 @@
 								},
 								{
 									"key": "client_id",
-									"value": "2",
+									"value": "{{client_id}}",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
-									"value": "ure8rTqUzxyFPJorSxSeBTvVimhDbJJ9VYdHFMH9",
+									"value": "{{client_secret}}",
 									"type": "text"
 								},
 								{
 									"key": "refresh_token",
-									"value": "def5020016238e4814263b2e619a324e404e932f3ff51a8a18733c021f4994f0710a8b8d1dd2fd1a12de04ae0d256eb6ad9ee9fb43ab33244561c87e5839b506381ed371ee644d572fd1ecdca2ede6e8d7092a774f12b661ad34b82654bceb7ec5070aa3cd4367fd3590bdb8148f8c3adad2cff42653c66af93c9491de47423052fc74e9ad03c47d665e382e09fb854ef67597f480053b412d9754c00e32404b41ede08ba94140a4b67aead2a672240711de8145214bf263c3b35b121784a037168fec8873084c0d55a13da2ef47fe939dbdc156cff9108459388352cae40d90f8b2d218da6519c9234aac117401ce18192b6b5a5978f49a0e5bccaa7efc2e4996daff555f3d3a1ccdb9c6c180dbfa77c6cf68644ae226ba65ce63e4f4d2bf12e598b7a327bc3ee61443fd44c446d51892e6451cb62b6c9b89a6db676fa52d5916956d4ea604e4a1fe88c81be4a9ce52951fe081d09f22eb149fb142468718ee9aae803a\n",
+									"value": "{{refresh_token}}",
 									"type": "text"
 								},
 								{
@@ -258,10 +303,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/oauth/token",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/oauth/token",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"oauth",
@@ -279,7 +324,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiOGE5MmE1MTExZTU4MDE5MzFhMmYyNTkxYjM2NzQxNjQ1NmZiMWI3YjZlODUwNzFlYWMwM2I2NzEzYzk3ZjJmZmVmZTFmMjRmNWVlYzU2MDEiLCJpYXQiOjE2Mzc2NDYzMjQuMzIxNDA1LCJuYmYiOjE2Mzc2NDYzMjQuMzIxNDE1LCJleHAiOjE2NjkxODIzMjQuMzIwOTQ3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.UkLJncBam6bb2hHdHBZtgviYtyL-ElBf3wumrzotyx60g9vBO82R40S1gRDmE6azGLNekWiOH80QEGvgStVxCqvjMMdePhdRStGaxE4nhIMkMVBz2rjjmww1OWTr580HgWZysuVTsBS0d-hADdfQSkr0K9Ag0-933SjtW0FzdoilrcA6SApSNuY67dLFG6s425tekQYrnL04jdDKY2qTVpFWv6gfwnEb5xUShl1qqSV2DKWTTjPnaUqRaPsUiyTRazSwY-OMFOBM5EWIJT1q5F-f6U_Zj1M0ncXtGNmEfi7YkKr3tTc2s0-pSujHsf9JkkDDnY3kgYPJQelMZHMx9-56OzxAN73U4b1goE7X65SgzL-vHmfJHOQqT2mpH-abseTe_YAWuTeHqSDUiRPmfSxuJCmIqDR8qRWPuuYKpGetE7oy4g-y6QHxpL4cUzaK99l-bmOov7f8DRaSNhTpqqhrdTvsPbHdcVNatCoDqa6rjfWN4ismxfHn3BihD0NOXLVjYpbtdrsPhXulNapwD5maaFARNIY8ZmfGSbm29G9zjAwYyv06BeUN274IaCArxIDon6SSS6FBQh2VQDDWRNzHKQXGgsN-cSVTvLomJjEj8tljuM7ctNZJKxiSG5Jxg3s-x02zVaarzOP0D4zWlzDUzjVo03Ox94UdDEEEshw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -293,10 +338,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost/api/user",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/user",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -314,7 +359,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiOGE5MmE1MTExZTU4MDE5MzFhMmYyNTkxYjM2NzQxNjQ1NmZiMWI3YjZlODUwNzFlYWMwM2I2NzEzYzk3ZjJmZmVmZTFmMjRmNWVlYzU2MDEiLCJpYXQiOjE2Mzc2NDYzMjQuMzIxNDA1LCJuYmYiOjE2Mzc2NDYzMjQuMzIxNDE1LCJleHAiOjE2NjkxODIzMjQuMzIwOTQ3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.UkLJncBam6bb2hHdHBZtgviYtyL-ElBf3wumrzotyx60g9vBO82R40S1gRDmE6azGLNekWiOH80QEGvgStVxCqvjMMdePhdRStGaxE4nhIMkMVBz2rjjmww1OWTr580HgWZysuVTsBS0d-hADdfQSkr0K9Ag0-933SjtW0FzdoilrcA6SApSNuY67dLFG6s425tekQYrnL04jdDKY2qTVpFWv6gfwnEb5xUShl1qqSV2DKWTTjPnaUqRaPsUiyTRazSwY-OMFOBM5EWIJT1q5F-f6U_Zj1M0ncXtGNmEfi7YkKr3tTc2s0-pSujHsf9JkkDDnY3kgYPJQelMZHMx9-56OzxAN73U4b1goE7X65SgzL-vHmfJHOQqT2mpH-abseTe_YAWuTeHqSDUiRPmfSxuJCmIqDR8qRWPuuYKpGetE7oy4g-y6QHxpL4cUzaK99l-bmOov7f8DRaSNhTpqqhrdTvsPbHdcVNatCoDqa6rjfWN4ismxfHn3BihD0NOXLVjYpbtdrsPhXulNapwD5maaFARNIY8ZmfGSbm29G9zjAwYyv06BeUN274IaCArxIDon6SSS6FBQh2VQDDWRNzHKQXGgsN-cSVTvLomJjEj8tljuM7ctNZJKxiSG5Jxg3s-x02zVaarzOP0D4zWlzDUzjVo03Ox94UdDEEEshw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -332,10 +377,10 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost/api/user/logout",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/user/logout",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",

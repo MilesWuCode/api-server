@@ -1,13 +1,7 @@
 # Laravel + Laravel Passport + Lighthouse
 
-## Env
+## Plan
 
--   docker
--   php
--   laravel
--   laravel-passport
--   laravel-sail
--   lighthouse
 -   medialibrary
 
 ## Install Laravel, Sail
@@ -154,10 +148,16 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 # export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
 ```
 
-
 ## Comment
 
 ```sh
 sail php artisan make:model Todo -a --api --test
 
 ```
+
+## N+1 check
+```sh
+composer require beyondcode/laravel-query-detector --dev
+php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
+```
+

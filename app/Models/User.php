@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -61,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new CustomVerifyEmail);
     }
 
-    public function todos()
+    public function todos(): HasMany
     {
         return $this->hasMany(Todo::class);
     }
