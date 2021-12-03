@@ -50,7 +50,7 @@ type Mutation {
         @guard
         @can(ability: "update", model: "App\\Models\\Todo", query: true)
 
-    deleteTodo(id: ID!): Todo
+    deleteTodo(id: ID! @eq): Todo
         @delete(model: "App\\Models\\Todo")
         @guard
         @can(ability: "delete", model: "App\\Models\\Todo", query: true)
