@@ -48,6 +48,7 @@ class BlogController extends Controller
         return Fractal::create($blogs, new BlogTransformer())
         // 手動includes
         // ->parseIncludes('tags')
+        // ->includeTags()
             ->respond();
     }
 
@@ -70,6 +71,7 @@ class BlogController extends Controller
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
         // ->parseIncludes('tags')
+        // ->includeTags()
             ->respond();
     }
 
@@ -84,6 +86,7 @@ class BlogController extends Controller
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
         // ->parseIncludes('tags')
+        // ->includeTags()
             ->respond();
     }
 
@@ -107,6 +110,7 @@ class BlogController extends Controller
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
         // ->parseIncludes('tags')
+        // ->includeTags()
             ->respond();
     }
 

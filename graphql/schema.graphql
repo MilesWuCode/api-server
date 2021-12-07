@@ -13,6 +13,8 @@ type User {
     updated_at: DateTime!
     todos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
         @hasMany(type: "paginator", relation: "todos")
+    blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @hasMany(type: "paginator", relation: "blogs")
 }
 
 type Todo {
@@ -24,11 +26,34 @@ type Todo {
     updated_at: DateTime!
 }
 
+type Blog {
+    id: ID!
+    user: User! @belongsTo(relation: "user")
+    title: String!
+    body: String!
+    status: Boolean!
+    publish_at: Date
+    created_at: DateTime!
+    updated_at: DateTime!
+    tags: [Tag!]!
+    tagsPaginator(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
+        @hasMany(type: "paginator", relation: "tags")
+}
+
+type Tag {
+    id: ID!
+    name: String!
+    type: String!
+}
+
 type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
     me: User! @auth @guard
     todo(id: ID @eq): Todo @find
+    blog(id: ID @eq): Blog @find
+    blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @paginate
 }
 
 type Mutation {
@@ -54,4 +79,13 @@ type Mutation {
         @delete(model: "App\\Models\\Todo")
         @guard
         @can(ability: "delete", model: "App\\Models\\Todo", query: true)
+
+    createBlog(
+        title: String! @rules(apply: ["required", "string", "max:100"])
+        body: String! @rules(apply: ["required", "string", "max:100"])
+    ): Blog
+        @create(model: "App\\Models\\Blog")
+        @guard
+        @can(ability: "create")
+        @inject(context: "user.id", name: "user_id")
 }
