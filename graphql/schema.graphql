@@ -47,13 +47,22 @@ type Tag {
 }
 
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
     me: User! @auth @guard
-    todo(id: ID @eq): Todo @find
+
+    user(id: ID @eq): User @find
+    users: [User!]! @paginate(defaultCount: 10)
+
+    myTodo(id: ID @eq): Todo @find @whereAuth(relation: "user") @guard
+
     blog(id: ID @eq): Blog @find
     blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
         @paginate
+
+    myBlog(id: ID @eq): Blog @find @whereAuth(relation: "user") @guard
+    myBlogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @paginate
+        @whereAuth(relation: "user")
+        @guard
 }
 
 type Mutation {
