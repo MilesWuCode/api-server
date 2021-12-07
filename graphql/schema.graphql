@@ -35,7 +35,7 @@ type Blog {
     publish_at: Date
     created_at: DateTime!
     updated_at: DateTime!
-    tags: [Tag!]!
+    tags: [Tag!]! @with(relation: "tags")
     tagsPaginator(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
         @hasMany(type: "paginator", relation: "tags")
 }
