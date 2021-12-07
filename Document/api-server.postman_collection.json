@@ -404,7 +404,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -418,10 +418,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost/api/todo?page=1&limit=2&sort=idDesc",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/todo?page=2&limit=2&sort=id_desc",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -430,7 +430,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "2"
 								},
 								{
 									"key": "limit",
@@ -438,7 +438,7 @@
 								},
 								{
 									"key": "sort",
-									"value": "idDesc"
+									"value": "id_desc"
 								}
 							]
 						}
@@ -453,7 +453,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -477,10 +477,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/api/todo",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/todo",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -498,7 +498,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -512,10 +512,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost/api/todo/27",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/todo/27",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -534,7 +534,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -568,10 +568,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/api/todo/26",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/todo/26",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
@@ -590,7 +590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY2MTlmMTg0MDI4MTNhNzZmNTJjNWFmN2QwNDMzZDRkMWI2MGRhMWYwYzFhNTg1NmYzZjNlNDUyZjE2OGMwNTU2MTBmMjc3MWVkNDVjZjEiLCJpYXQiOjE2Mzc4MjE1OTUuNjgzMjA0LCJuYmYiOjE2Mzc4MjE1OTUuNjgzMjA3LCJleHAiOjE2NjkzNTc1OTUuNjc5ODksInN1YiI6IjMiLCJzY29wZXMiOltdfQ.pUVypWxn-YT3fPugsZoha7gk_YlcLJy-8YQQ7x0Ft-cFHbBLH76BuU3tQeoz6NOX-vI_XMFn2F-DaCokZj6jYPOVDGqzgETH69NagEReNG9AXCTjH1zs5ZAYfh5Ckb37xaQWLnnA87o5NkY-_c8GUOoVLAI8MIHEdH09FC_by5BsSoNnz-vE1lsDuJ-yTU7d3m0i6vdCbsh3yt4ww2iPov5RSRDnkLOyvJtitthl2AN_YgAib3EoGRMCKwznNxTE6XJXsK7DoQgYoNYbfchDtHlosZjRWd85y1WXqbH2Q_9meOjnBkaI7dhbvJlwN9g68ZQZtVcvYqOWFBlOaqpXtJuBFFXNvJ0CdgyE3vTc_r73itP-JHRu__oJEAZ_C3m8QzMJmfqoFDipHNGpwEcAGLuRMbwAlj9xdM5h9FzsdV_jXzSeNmpBlVoCegNrF7XdOq12SCtiRbEGX4oWrUZcYGwOgM8bzxcIwL1GVRu0HSKGRWs-NvNAYyiMyUp35YSni1RgCxkfULBUv9-fZKoThSXUgvsT5kZY9yvAk-xuuHVeVKcK8KWIgi0G34aDRmNOWIqTvJXDJ3PpTgYENJLicqaV7s8qF23OcYsNchso4Q2fgUe6lGIx0U5fPujQSxIZ0TJ6iGRAaTf-KfsIQxoMlkawsLcs1FOEb_otr1oNV3Y",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -614,15 +614,377 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost/api/todo/19",
-							"protocol": "http",
+							"raw": "{{http}}://{{domain}}/api/todo/19",
+							"protocol": "{{http}}",
 							"host": [
-								"localhost"
+								"{{domain}}"
 							],
 							"path": [
 								"api",
 								"todo",
 								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog?page=1&limit=2&sort=id_desc&include=tags",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "id_desc"
+								},
+								{
+									"key": "include",
+									"value": "tags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "abcdefg",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ggg",
+									"type": "text"
+								},
+								{
+									"key": "publish_at",
+									"value": "2021-11-08",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tags",
+									"value": "",
+									"description": "空值清空用",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tags[0]",
+									"value": "a1",
+									"type": "text"
+								},
+								{
+									"key": "tags[1]",
+									"value": "b2",
+									"type": "text"
+								},
+								{
+									"key": "tags[2]",
+									"value": "c3",
+									"type": "text"
+								},
+								{
+									"key": "tags[3]",
+									"value": "d4",
+									"type": "text"
+								},
+								{
+									"key": "tags[4]",
+									"value": "e5",
+									"type": "text"
+								},
+								{
+									"key": "tags[5]",
+									"value": "f6",
+									"description": "最多5個",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog?include=tags",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "tags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog",
+								"201"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "tags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "abcdefg",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ggg",
+									"type": "text"
+								},
+								{
+									"key": "publish_at",
+									"value": "2021-11-08",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tags",
+									"value": "",
+									"description": "空值清空用",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tags[0]",
+									"value": "a1",
+									"type": "text"
+								},
+								{
+									"key": "tags[1]",
+									"value": "b2",
+									"type": "text"
+								},
+								{
+									"key": "tags[2]",
+									"value": "c3",
+									"type": "text"
+								},
+								{
+									"key": "tags[3]",
+									"value": "d4",
+									"type": "text"
+								},
+								{
+									"key": "tags[4]",
+									"value": "e5",
+									"type": "text"
+								},
+								{
+									"key": "tags[5]",
+									"value": "f6",
+									"description": "最多5個",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog",
+								"201"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "tags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog/201",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog",
+								"201"
 							]
 						}
 					},

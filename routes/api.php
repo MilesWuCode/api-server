@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,14 @@ Route::middleware('auth:api')->get('/user', [UserController::class, 'show']);
 Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout']);
 // TODO
 Route::middleware('auth:api')->apiResource('todo', TodoController::class);
+Route::middleware('auth:api')->apiResource('blog', BlogController::class);
+
+// PUBLIC
+// Route::group(function () {
+//     //
+// });
+
+// PRiVATE
+// Route::middleware(['auth:api'])->group(function () {
+//     //
+// });

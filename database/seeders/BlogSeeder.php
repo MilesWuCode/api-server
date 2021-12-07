@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TestingSeeder extends Seeder
+class BlogSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,6 @@ class TestingSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            TodoSeeder::class,
-            BlogSeeder::class,
-        ]);
+        \App\Models\Blog::factory()->count(200)->create();
     }
 }

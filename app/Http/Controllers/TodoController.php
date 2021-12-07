@@ -31,19 +31,19 @@ class TodoController extends Controller
         Validator::make($request->all(), [
             'page' => 'sometimes|numeric|min:1',
             'limit' => 'sometimes|numeric|min:1|max:100',
-            'sort' => 'sometimes|in:idAsc,idDesc,updated_atAsc,updated_atDesc',
+            'sort' => 'sometimes|in:id_asc,id_desc,updated_at_asc,updated_at_desc',
         ])->validate();
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 5);
-        $sort = $request->get('sort', 'idAsc');
+        $sort = $request->get('sort', 'id_asc');
 
-        [$column, $order] = explode('-', Str::snake($sort, '-'));
+        [$column, $order] = preg_split('/_(?=(asc|desc)$)/', $sort);
 
         return $request->user()
             ->todos()
             ->orderBy($column, $order)
-            ->paginate($limit);
+            ->paginate($limit, ['*'], 'page', $page);
     }
 
     /**

@@ -13,7 +13,9 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "mll-lab/laravel-graphql-playground": "^2.5",
-        "nuwave/lighthouse": "^5.26"
+        "nuwave/lighthouse": "^5.26",
+        "spatie/laravel-fractal": "^5.8",
+        "spatie/laravel-tags": "^4.2"
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.5",

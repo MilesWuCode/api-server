@@ -4,10 +4,10 @@ namespace Tests\Feature\Models;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 
-class TodoTest extends TestCase
+class BlogTest extends TestCase
 {
     use WithFaker;
 
@@ -25,16 +25,21 @@ class TodoTest extends TestCase
             ['*']
         );
 
-        $response = $this->get('/api/todo?page=1&limit=2&sort=id_desc');
+        $response = $this->get('/api/blog?page=1&limit=2&sort=id_desc');
 
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-            'total',
-            'per_page',
-            'last_page',
             'data',
-            'current_page',
+            'meta' => [
+                'pagination' => [
+                    'total',
+                    'count',
+                    'per_page',
+                    'current_page',
+                    'total_pages',
+                ]
+            ],
         ]);
     }
 
@@ -47,9 +52,9 @@ class TodoTest extends TestCase
             ['*']
         );
 
-        $todo = $user->todos()->inRandomOrder()->first();
+        $blog = $user->blogs()->inRandomOrder()->first();
 
-        $response = $this->get('/api/todo/' . $todo->id);
+        $response = $this->get('/api/blog/' . $blog->id);
 
         $response->assertStatus(200);
     }
@@ -63,8 +68,10 @@ class TodoTest extends TestCase
             ['*']
         );
 
-        $response = $this->post('/api/todo/', [
-            'content' => $this->faker->text(rand(5, 20)),
+        $response = $this->post('/api/blog/', [
+            'title' => $this->faker->text(rand(5, 200)),
+            'body' => $this->faker->paragraph(),
+            'status' => $this->faker->boolean(),
         ]);
 
         $response->assertStatus(200);
@@ -79,11 +86,12 @@ class TodoTest extends TestCase
             ['*']
         );
 
-        $todo = $user->todos()->inRandomOrder()->first();
+        $blog = $user->blogs()->inRandomOrder()->first();
 
-        $response = $this->post('/api/todo/'.$todo->id, [
-            'content' => $this->faker->text(rand(5, 20)),
-            'active' => !$todo->active,
+        $response = $this->post('/api/blog/'.$blog->id, [
+            'title' => $this->faker->text(rand(5, 200)),
+            'body' => $this->faker->paragraph(),
+            'status' => !$blog->status,
             '_method' => 'PUT',
         ]);
 
@@ -99,9 +107,9 @@ class TodoTest extends TestCase
             ['*']
         );
 
-        $todo = $user->todos()->inRandomOrder()->first();
+        $blog = $user->blogs()->inRandomOrder()->first();
 
-        $response = $this->post('/api/todo/'.$todo->id, [
+        $response = $this->post('/api/blog/'.$blog->id, [
             '_method' => 'DELETE',
         ]);
 

@@ -99,6 +99,9 @@ config/auth.php
 ```sh
 # Tinker
 sail php artisan tinker
+
+# run test
+sail php artisan test
 ```
 
 ```php
@@ -152,12 +155,39 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 
 ```sh
 sail php artisan make:model Todo -a --api --test
-
 ```
 
 ## N+1 check
+
 ```sh
-composer require beyondcode/laravel-query-detector --dev
-php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
+# install
+sail composer require beyondcode/laravel-query-detector --dev
+
+# provider
+sail php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
 ```
 
+## Tags
+
+```sh
+# install
+sail composer require spatie/laravel-tags
+
+# migration
+sail php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
+
+# migrate
+sail php artisan migrate
+
+# config
+sail php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-config"
+```
+
+## 
+```sh
+# install
+sail composer require spatie/laravel-fractal
+
+# config
+php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider"
+```
