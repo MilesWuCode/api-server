@@ -1,0 +1,38 @@
+type Blog {
+    id: ID!
+    user: User! @belongsTo(relation: "user")
+    title: String!
+    body: String!
+    status: Boolean!
+    publish_at: Date
+    created_at: DateTime!
+    updated_at: DateTime!
+    tags: [Tag!]! @with(relation: "tags")
+    tagsPaginator(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
+        @hasMany(type: "paginator", relation: "tags")
+}
+
+extend type Query {
+    blog(id: ID @eq): Blog @find
+
+    blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @paginate
+
+    myBlog(id: ID @eq): Blog @find @whereAuth(relation: "user") @guard
+
+    myBlogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @paginate
+        @whereAuth(relation: "user")
+        @guard
+}
+
+extend type Mutation {
+    createBlog(
+        title: String! @rules(apply: ["required", "string", "max:100"])
+        body: String! @rules(apply: ["required", "string", "max:100"])
+    ): Blog
+        @create(model: "App\\Models\\Blog")
+        @guard
+        @can(ability: "create")
+        @inject(context: "user.id", name: "user_id")
+}

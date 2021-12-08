@@ -1,0 +1,37 @@
+type Todo {
+    id: ID!
+    user: User! @belongsTo(relation: "user")
+    content: String!
+    active: Boolean!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+extend type Query {
+    myTodo(id: ID @eq): Todo @find @whereAuth(relation: "user") @guard
+}
+
+extend type Mutation {
+    createTodo(
+        content: String! @rules(apply: ["required", "string", "max:100"])
+    ): Todo
+        @create(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "create")
+        @inject(context: "user.id", name: "user_id")
+
+    updateTodo(
+        id: ID! @eq
+        content: String
+            @rules(apply: ["sometimes", "required", "string", "max:100"])
+        active: Boolean @rules(apply: ["sometimes", "required", "boolean"])
+    ): Todo
+        @update(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "update", model: "App\\Models\\Todo", query: true)
+
+    deleteTodo(id: ID! @eq): Todo
+        @delete(model: "App\\Models\\Todo")
+        @guard
+        @can(ability: "delete", model: "App\\Models\\Todo", query: true)
+}

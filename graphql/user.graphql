@@ -1,0 +1,18 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    todos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
+        @hasMany(type: "paginator", relation: "todos")
+    blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
+        @hasMany(type: "paginator", relation: "blogs")
+}
+
+extend type Query {
+    me: User! @auth @guard
+
+    user(id: ID @eq): User @find
+    users: [User!]! @paginate(defaultCount: 10)
+}
