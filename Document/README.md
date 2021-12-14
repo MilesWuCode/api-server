@@ -11,7 +11,7 @@
 curl -s "https://laravel.build/graphql-server" | bash
 
 # Laravel Sail, run docker
-./vendor/bin/sail up
+./vendor/bin/sail up -d
 
 # Laravel Sail, alias sail
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
@@ -167,7 +167,7 @@ sail composer require beyondcode/laravel-query-detector --dev
 sail php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
 ```
 
-## Tags
+## laravel-tags
 
 ```sh
 # install
@@ -183,11 +183,43 @@ sail php artisan migrate
 sail php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-config"
 ```
 
-## 
+## laravel-fractal
+
 ```sh
 # install
 sail composer require spatie/laravel-fractal
 
 # config
 php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider"
+```
+
+## laravel-medialibrary
+
+```sh
+# install
+sail composer require spatie/laravel-medialibrary
+
+# migration
+sail php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
+
+# migrate
+sail php artisan migrate
+
+# config
+sail php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
+```
+
+```php
+# config/filesystems.php
+'media' => [
+    'driver' => 'local',
+    'root'   => public_path('media'),
+    'url'    => env('APP_URL').'/media',
+],
+```
+
+```ini
+# .env
+# laravel-medialibrary
+MEDIA_DISK=media
 ```

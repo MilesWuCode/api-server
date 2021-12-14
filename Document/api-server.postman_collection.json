@@ -711,12 +711,12 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "name",
+									"key": "title",
 									"value": "abcdefg",
 									"type": "text"
 								},
 								{
-									"key": "content",
+									"key": "body",
 									"value": "ggg",
 									"type": "text"
 								},
@@ -740,27 +740,32 @@
 								{
 									"key": "tags[0]",
 									"value": "a1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "tags[1]",
 									"value": "b2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "tags[2]",
 									"value": "c3",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "tags[3]",
 									"value": "d4",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "tags[4]",
 									"value": "e5",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "tags[5]",
@@ -768,11 +773,22 @@
 									"description": "最多5個",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "gallery[0]",
+									"value": "CyvpEVcO4Iub8up41H16f5ALncT6hG8P3OD5B52e.jpg",
+									"type": "text"
+								},
+								{
+									"key": "gallery[1]",
+									"value": "temporary/siLO19IWTfteOtzZMCaXZP7VJJCQV4F7l5Z1KS59.jpg",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{http}}://{{domain}}/api/blog?include=tags",
+							"raw": "{{http}}://{{domain}}/api/blog?include=tags,gallery,illustration",
 							"protocol": "{{http}}",
 							"host": [
 								"{{domain}}"
@@ -784,7 +800,7 @@
 							"query": [
 								{
 									"key": "include",
-									"value": "tags"
+									"value": "tags,gallery,illustration"
 								}
 							]
 						}
@@ -813,7 +829,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
+							"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery,illustration",
 							"protocol": "{{http}}",
 							"host": [
 								"{{domain}}"
@@ -821,12 +837,12 @@
 							"path": [
 								"api",
 								"blog",
-								"201"
+								"240"
 							],
 							"query": [
 								{
 									"key": "include",
-									"value": "tags"
+									"value": "tags,gallery,illustration"
 								}
 							]
 						}
@@ -863,12 +879,12 @@
 									"type": "text"
 								},
 								{
-									"key": "name",
+									"key": "title",
 									"value": "abcdefg",
 									"type": "text"
 								},
 								{
-									"key": "content",
+									"key": "body",
 									"value": "ggg",
 									"type": "text"
 								},
@@ -989,6 +1005,102 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "collection",
+									"value": "gallery",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/miles/Desktop/007/c1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{http}}://{{domain}}/api/blog/file",
+							"protocol": "{{http}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"blog",
+								"file"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Graphql",
+			"item": [
+				{
+					"name": "Blog",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\n  blogs(first: 3, page: 1, orderBy: { column: ID, order: ASC }) {\n    data {\n      id\n      title\n    }\n    paginatorInfo {\n      total\n    }\n  }\n}\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

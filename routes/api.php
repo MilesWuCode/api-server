@@ -43,3 +43,7 @@ Route::middleware('auth:api')->apiResource('blog', BlogController::class);
 // Route::middleware(['auth:api'])->group(function () {
 //     //
 // });
+
+
+// BlogFile
+Route::middleware('auth:api')->post('/blog/file', [BlogController::class, 'file']);

@@ -22,7 +22,7 @@ class BlogTransformer extends TransformerAbstract
      * @var array
      */
     protected $availableIncludes = [
-        'tags',
+        'tags', 'illustration', 'gallery',
     ];
 
     /**
@@ -46,5 +46,15 @@ class BlogTransformer extends TransformerAbstract
     public function includeTags(Blog $blog)
     {
         return $this->collection($blog->tags, new TagTransformer);
+    }
+
+    public function includeIllustration(Blog $blog)
+    {
+        return $this->collection($blog->getMedia('illustration'), new MediaTransformer);
+    }
+
+    public function includeGallery(Blog $blog)
+    {
+        return $this->collection($blog->getMedia('gallery'), new MediaTransformer);
     }
 }

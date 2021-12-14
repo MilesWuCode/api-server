@@ -5,12 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\Tags\HasTags;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Blog extends Model
+
+class Blog extends Model implements HasMedia
 {
     use HasTags;
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'user_id',
@@ -33,5 +39,46 @@ class Blog extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        /**
+         * ->useDisk('s3')
+         * ->singleFile()
+         * ->onlyKeepLatest(3)
+         * ->withResponsiveImages()
+         */
+
+        $this->addMediaCollection('illustration')
+            ->acceptsFile(function (File $file) {
+                return $file->mimeType === 'image/jpeg';
+            });
+
+        // 1600*1200
+        $this->addMediaCollection('gallery')
+            ->acceptsMimeTypes(['image/jpeg'])
+            ->registerMediaConversions(function (Media $media) {
+                /**
+                 * ->border(10, 'black', Manipulations::BORDER_OVERLAY)
+                 * ->crop('crop-center', 400, 400)
+                 * ->greyscale()
+                 * ->quality(80)
+                 * ->sharpen(10)
+                 */
+
+                $this
+                    ->addMediaConversion('thumb')
+                    ->width(320)
+                    ->height(240);
+            });
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+              ->width(320)
+              ->height(240)
+              ->performOnCollections('gallery');
     }
 }

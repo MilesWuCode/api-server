@@ -53,6 +53,19 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        // laravel-medialibrary
+        'media' => [
+            'driver' => 'local',
+            'root'   => public_path('media'),
+            'url'    => env('APP_URL').'/media',
+        ],
+
+        // 暫存資料夾Temporary
+        'temporary' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/temporary'),
+        ],
+
     ],
 
     /*

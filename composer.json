@@ -15,6 +15,7 @@
         "mll-lab/laravel-graphql-playground": "^2.5",
         "nuwave/lighthouse": "^5.26",
         "spatie/laravel-fractal": "^5.8",
+        "spatie/laravel-medialibrary": "^9.9",
         "spatie/laravel-tags": "^4.2"
     },
     "require-dev": {

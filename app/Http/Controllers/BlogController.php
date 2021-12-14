@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FileBlogRequest;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
@@ -9,6 +10,7 @@ use App\Transformers\BlogTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Fractal\Facades\Fractal;
 
@@ -68,6 +70,14 @@ class BlogController extends Controller
             $blog->syncTagsWithType(is_array($tags) ? $tags : [], 'blog');
         }
 
+        if ($request->has('gallery')) {
+            foreach ($request->get('gallery') as $file) {
+                if (Storage::disk('temporary')->exists($file)) {
+                    $blog->addMediaFromDisk($file, 'temporary')->toMediaCollection('gallery');
+                }
+            }
+        }
+
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
         // ->parseIncludes('tags')
@@ -123,5 +133,21 @@ class BlogController extends Controller
     public function destroy(Blog $blog): Response
     {
         return response($blog->delete(), 200);
+    }
+
+    /**
+     * Post File
+     *
+     * @param  \App\Http\Requests\FileBlogRequest  $request
+     */
+    public function file(FileBlogRequest $request)
+    {
+        // $blog->addMediaFromRequest('file')->toMediaCollection($request->get('collection'));
+
+        // return response($blog->getFirstMedia($request->get('collection')),200);
+
+        $fileName = basename($request->file('file')->store('temporary'));
+
+        return response()->json(['file' => $fileName], 200);
     }
 }
