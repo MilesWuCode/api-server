@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use Spatie\Fractal\Facades\Fractal;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Hash;
+use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -118,7 +120,9 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        return $request->user();
+        // return $request->user();
+        return Fractal::create($request->user(), new UserTransformer())
+            ->respond();
     }
 
     /**

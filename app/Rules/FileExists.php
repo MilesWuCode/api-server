@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
-class FileExists implements Rule
+class FileExist implements Rule
 {
     /**
      * Create a new rule instance.

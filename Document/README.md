@@ -1,9 +1,5 @@
 # Laravel + Laravel Passport + Lighthouse
 
-## Plan
-
--   medialibrary
-
 ## Install Laravel, Sail
 
 ```sh
@@ -17,20 +13,20 @@ curl -s "https://laravel.build/graphql-server" | bash
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 ```
 
-## Lighthouse
+## nuwave/lighthouse
 
 ```sh
 # install package
-sail composer require nuwave/lighthouse
+composer require nuwave/lighthouse
 
 # GraphQL DevTools
-sail composer require mll-lab/laravel-graphql-playground
+composer require mll-lab/laravel-graphql-playground
 
 # Publish the default schema
-sail php artisan vendor:publish --tag=lighthouse-schema
+php artisan vendor:publish --tag=lighthouse-schema
 
 # Configuration : config/lighthouse.php
-sail php artisan vendor:publish --tag=lighthouse-config
+php artisan vendor:publish --tag=lighthouse-config
 ```
 
 config/cors.php
@@ -43,17 +39,17 @@ return [
 ];
 ```
 
-## Laravel Password
+## laravel/passport
 
 ```sh
 # install package
-sail composer require laravel/passport
+composer require laravel/passport
 
 # oauth private/public key file
-sail php artisan passport:install
+php artisan passport:install
 
 # publish config
-sail php artisan vendor:publish --tag=passport-config
+php artisan vendor:publish --tag=passport-config
 ```
 
 app/Models/User.php
@@ -98,10 +94,13 @@ config/auth.php
 
 ```sh
 # Tinker
-sail php artisan tinker
+php artisan tinker
 
 # run test
-sail php artisan test
+php artisan test --testsuite=Feature --stop-on-failure
+
+# 可以直接使用.env.testing來執行測試
+cp .env .env.testing
 ```
 
 ```php
@@ -128,16 +127,6 @@ $user->save();
 -   http://localhost/oauth/token
 -   http://localhost/api/user
 
-## Test
-
-```sh
-# 可以直接使用.env.testing來執行測試
-cp .env .env.testing
-
-#
-sail php artisan test --testsuite=Feature --stop-on-failure
-```
-
 ## .zshrc
 
 ```sh
@@ -151,62 +140,65 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 # export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
 ```
 
-## Comment
+## Todo
 
 ```sh
-sail php artisan make:model Todo -a --api --test
+php artisan make:model Todo -a --api --test
 ```
 
 ## N+1 check
 
 ```sh
 # install
-sail composer require beyondcode/laravel-query-detector --dev
+composer require beyondcode/laravel-query-detector --dev
 
 # provider
-sail php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
+php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
 ```
 
 ## laravel-tags
 
 ```sh
 # install
-sail composer require spatie/laravel-tags
+composer require spatie/laravel-tags
 
 # migration
-sail php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
+php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
 
 # migrate
-sail php artisan migrate
+php artisan migrate
 
 # config
-sail php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-config"
+php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-config"
 ```
 
 ## laravel-fractal
 
 ```sh
 # install
-sail composer require spatie/laravel-fractal
+composer require spatie/laravel-fractal
 
 # config
 php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider"
+
+# make
+php artisan make:transformer UserTransformer
 ```
 
 ## laravel-medialibrary
 
 ```sh
 # install
-sail composer require spatie/laravel-medialibrary
+composer require spatie/laravel-medialibrary
 
 # migration
-sail php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
 
 # migrate
-sail php artisan migrate
+php artisan migrate
 
 # config
-sail php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
 ```
 
 ```php
@@ -223,3 +215,49 @@ sail php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServ
 # laravel-medialibrary
 MEDIA_DISK=media
 ```
+
+## laravelista/comments(wip)
+
+```sh
+composer require laravelista/comments
+```
+
+## cybercog/laravel-love(wip)
+
+```sh
+composer require cybercog/laravel-love
+```
+
+## sentry/sentry-laravel(wip)
+
+```sh
+composer require sentry/sentry-laravel
+```
+
+## spatie/laravel-responsecache(wip)
+
+```sh
+composer require spatie/laravel-responsecache
+```
+
+## laravel/scout(wip)
+
+```sh
+composer require laravel/scout
+```
+
+## spatie/eloquent-sortable(wip)
+
+```sh
+composer require spatie/eloquent-sortable
+```
+
+## swooletw/laravel-swoole(wip)
+
+## wip
+
+-   user avatar, default value
+-   user update
+-   blog update with images
+-   verify code
+-   graphql/api thumb

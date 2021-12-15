@@ -4,6 +4,7 @@ type Meida
     name: String!
     file_name: String!
     size: Int!
+    url: String! @field(resolver: "App\\GraphQL\\Types\\MediaType@url")
     collection_name: String!
     created_at: DateTime!
     updated_at: DateTime!

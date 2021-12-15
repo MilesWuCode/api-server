@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Spatie\Tags\HasTags;
-use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\File;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Tags\HasTags;
 
 class Blog extends Model implements HasMedia
 {
@@ -56,17 +55,16 @@ class Blog extends Model implements HasMedia
                 return $file->mimeType === 'image/jpeg';
             });
 
-        // 1600*1200
         $this->addMediaCollection('gallery')
             ->acceptsMimeTypes(['image/jpeg'])
             ->registerMediaConversions(function (Media $media) {
-                /**
-                 * ->border(10, 'black', Manipulations::BORDER_OVERLAY)
-                 * ->crop('crop-center', 400, 400)
-                 * ->greyscale()
-                 * ->quality(80)
-                 * ->sharpen(10)
-                 */
+            /**
+             * ->border(10, 'black', Manipulations::BORDER_OVERLAY)
+             * ->crop('crop-center', 400, 400)
+             * ->greyscale()
+             * ->quality(80)
+             * ->sharpen(10)
+             */
 
                 $this
                     ->addMediaConversion('thumb')
@@ -78,9 +76,9 @@ class Blog extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(320)
-              ->height(240)
-              ->performOnCollections('gallery');
+            ->width(320)
+            ->height(240)
+            ->performOnCollections('gallery');
     }
 
     public function illustration(): MorphMany
