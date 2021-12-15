@@ -70,6 +70,14 @@ class BlogController extends Controller
             $blog->syncTagsWithType(is_array($tags) ? $tags : [], 'blog');
         }
 
+        if ($request->has('illustration')) {
+            foreach ($request->get('illustration') as $file) {
+                if (Storage::disk('temporary')->exists($file)) {
+                    $blog->addMediaFromDisk($file, 'temporary')->toMediaCollection('illustration');
+                }
+            }
+        }
+
         if ($request->has('gallery')) {
             foreach ($request->get('gallery') as $file) {
                 if (Storage::disk('temporary')->exists($file)) {
@@ -142,10 +150,6 @@ class BlogController extends Controller
      */
     public function file(FileBlogRequest $request)
     {
-        // $blog->addMediaFromRequest('file')->toMediaCollection($request->get('collection'));
-
-        // return response($blog->getFirstMedia($request->get('collection')),200);
-
         $fileName = basename($request->file('file')->store('temporary'));
 
         return response()->json(['file' => $fileName], 200);

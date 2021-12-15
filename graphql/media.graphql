@@ -1,0 +1,10 @@
+type Meida
+    @model(class: "\\Spatie\\MediaLibrary\\MediaCollections\\Models\\Media") {
+    id: ID!
+    name: String!
+    file_name: String!
+    size: Int!
+    collection_name: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

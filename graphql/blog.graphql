@@ -7,9 +7,15 @@ type Blog {
     publish_at: Date
     created_at: DateTime!
     updated_at: DateTime!
-    tags: [Tag!]! @with(relation: "tags")
-    tagsPaginator(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
-        @hasMany(type: "paginator", relation: "tags")
+
+    tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
+        @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 2)
+
+    illustration: [Meida!]
+        @morphMany(relation: "illustration", type: PAGINATOR, defaultCount: 10)
+
+    gallery: [Meida!]
+        @morphMany(relation: "gallery", type: PAGINATOR, defaultCount: 10)
 }
 
 extend type Query {

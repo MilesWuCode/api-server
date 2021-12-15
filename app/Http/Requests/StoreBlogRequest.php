@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FileExists;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBlogRequest extends FormRequest
@@ -30,8 +31,10 @@ class StoreBlogRequest extends FormRequest
             'publish_at' => 'nullable|date',
             'tags' => 'sometimes|array|nullable|max:5',
             'tags.*' => 'required|string',
+            'illustration' => 'sometimes|array',
+            'illustration.*' => ['required', 'string', new FileExists],
             'gallery' => 'sometimes|array',
-            'gallery.*' => 'required|string',
+            'gallery.*' => ['required', 'string', new FileExists],
         ];
     }
 }

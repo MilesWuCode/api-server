@@ -9,6 +9,7 @@ scalar DateTime
 #import todo.graphql
 #import blog.graphql
 #import tag.graphql
+#import media.graphql
 
 type Query
 
