@@ -261,3 +261,4 @@ composer require spatie/eloquent-sortable
 -   blog update with images
 -   verify code
 -   graphql/api thumb
+-   file upload

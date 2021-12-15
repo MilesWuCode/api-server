@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaType
 {
-    public function url(Media $media, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): string
+    public function getUrl(Media $media, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): string
     {
         return $media->getUrl();
     }
