@@ -4,15 +4,18 @@ type User {
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
+
     todos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
-        @hasMany(type: "paginator", relation: "todos")
+        @hasMany(relation: "todos", type: PAGINATOR, defaultCount: 3)
+
     blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
-        @hasMany(type: "paginator", relation: "blogs")
+        @hasMany(relation: "blogs", type: PAGINATOR, defaultCount: 3)
 }
 
 extend type Query {
     me: User! @auth @guard
 
     user(id: ID @eq): User @find
+
     users: [User!]! @paginate(defaultCount: 10)
 }

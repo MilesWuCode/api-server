@@ -9,13 +9,13 @@ type Blog {
     updated_at: DateTime!
 
     tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
-        @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 2)
+        @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 3)
 
     illustration: [Meida!]
-        @morphMany(relation: "illustration", type: PAGINATOR, defaultCount: 10)
+        @morphMany(relation: "illustration", type: PAGINATOR, defaultCount: 3)
 
     gallery: [Meida!]
-        @morphMany(relation: "gallery", type: PAGINATOR, defaultCount: 10)
+        @morphMany(relation: "gallery", type: PAGINATOR, defaultCount: 3)
 }
 
 extend type Query {
