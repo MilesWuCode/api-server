@@ -4,7 +4,7 @@
 
 ```sh
 # Laravel, install
-curl -s "https://laravel.build/graphql-server" | bash
+curl -s "https://laravel.build/api-server" | bash
 
 # Laravel Sail, run docker
 ./vendor/bin/sail up -d
@@ -134,10 +134,10 @@ $user->save();
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
 # switch php version
-export PATH="/usr/local/opt/php@7.4/bin:$PATH"
-export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
-# export PATH="/usr/local/opt/php@8.0/bin:$PATH"
-# export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+# export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+# export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 ```
 
 ## Todo
@@ -262,3 +262,13 @@ composer require spatie/eloquent-sortable
 -   verify code
 -   graphql/api thumb
 -   file upload
+
+## run server
+
+```sh
+php artisan o:c
+php artisan migrate
+php artisan passport:install
+php artisan db:seed --class=TestingSeeder
+composer dump-autoload
+```

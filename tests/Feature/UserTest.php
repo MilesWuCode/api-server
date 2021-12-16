@@ -111,12 +111,14 @@ final class UserTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-            'id',
-            'name',
-            'email',
-            'email_verified_at',
-            'created_at',
-            'updated_at',
+            'data' => [
+                'id',
+                'name',
+                'email',
+                'email_verified_at',
+                'created_at',
+                'updated_at',
+            ],
         ]);
     }
 

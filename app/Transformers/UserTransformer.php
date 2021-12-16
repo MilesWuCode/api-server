@@ -38,6 +38,7 @@ class UserTransformer extends TransformerAbstract
             'email' => $user->email,
             'avatar' => $user->getFirstMediaUrl('avatar'),
             // 'avatar' => $user->url,
+            'email_verified_at' => $user->email_verified_at->format('Y-m-d H:i:s'),
             'created_at' => $user->created_at->format('Y-m-d H:i:s'),
             'updated_at' => (string) $user->updated_at,
         ];
