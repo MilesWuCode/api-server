@@ -96,14 +96,14 @@ class Blog extends Model implements HasMedia, ReactableInterface
             ->where('collection_name', 'gallery');
     }
 
-    public function getLikeAttribute()
+    public function getLikeCountAttribute()
     {
         return $this->viaLoveReactant()
             ->getReactionCounterOfType('Like')
             ->getCount();
     }
 
-    public function getDislikeAttribute()
+    public function getDislikeCountAttribute()
     {
         return $this->viaLoveReactant()
             ->getReactionCounterOfType('Dislike')
