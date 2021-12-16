@@ -11,10 +11,10 @@ type Blog {
     tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
         @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 3)
 
-    illustration: [Meida!]
+    illustration: [Media!]
         @morphMany(relation: "illustration", type: PAGINATOR, defaultCount: 3)
 
-    gallery: [Meida!]
+    gallery: [Media!]
         @morphMany(relation: "gallery", type: PAGINATOR, defaultCount: 3)
 }
 

@@ -1,4 +1,4 @@
-type Meida
+type Media
     @model(class: "\\Spatie\\MediaLibrary\\MediaCollections\\Models\\Media") {
     id: ID!
     name: String!

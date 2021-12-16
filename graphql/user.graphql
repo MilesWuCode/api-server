@@ -6,7 +6,7 @@ type User {
     updated_at: DateTime!
     avatar_url: String!
 
-    avatar: [Meida!] @morphMany(relation: "avatar")
+    avatar: [Media!] @morphMany(relation: "avatar")
 
     todos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
         @hasMany(relation: "todos", type: PAGINATOR, defaultCount: 3)
