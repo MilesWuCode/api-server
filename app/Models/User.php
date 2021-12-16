@@ -3,22 +3,25 @@
 namespace App\Models;
 
 use App\Notifications\CustomVerifyEmail;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+// use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// use Laravel\Sanctum\HasApiTokens;
 use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements MustVerifyEmail, HasMedia, ReacterableInterface
 {
     use HasApiTokens, HasFactory, Notifiable;
     use InteractsWithMedia;
+    use Reacterable;
 
     /**
      * The attributes that are mass assignable.
@@ -98,6 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             ->performOnCollections('avatar');
     }
 
+    // 照片
     public function avatar(): MorphMany
     {
         return $this->morphMany(config('media-library.media_model'), 'model')
@@ -108,5 +112,23 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function getAvatarUrlAttribute(): string
     {
         return $this->getFirstMediaUrl('avatar');
+    }
+
+    // Toggle Like,Dislike
+    public function toggleLove($reactant, $reactionType)
+    {
+        $reacterFacade = $this->viaLoveReacter();
+
+        $reverse = $reactionType === 'Like' ? 'Dislike' : 'Like';
+
+        if ($reacterFacade->hasReactedTo($reactant, $reverse)) {
+            $reacterFacade->unreactTo($reactant, $reverse);
+        }
+
+        if ($reacterFacade->hasReactedTo($reactant, $reactionType)) {
+            $reacterFacade->unreactTo($reactant, $reactionType);
+        } else {
+            $reacterFacade->reactTo($reactant, $reactionType);
+        }
     }
 }

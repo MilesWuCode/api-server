@@ -225,7 +225,24 @@ composer require laravelista/comments
 ## cybercog/laravel-love(wip)
 
 ```sh
+#
 composer require cybercog/laravel-love
+
+#
+php artisan migrate
+
+#
+php artisan love:reaction-type-add --default
+
+#
+sail php artisan love:setup-reacterable --model="App\Models\User" --nullable
+sail php artisan migrate
+sail php artisan love:register-reacters --model="App\Models\User"
+
+#
+sail php artisan love:setup-reactable --model="App\Models\Blog" --nullable
+sail php artisan migrate
+sail php artisan love:register-reactants --model="App\Models\Blog"
 ```
 
 ## sentry/sentry-laravel(wip)
@@ -269,6 +286,7 @@ composer require spatie/eloquent-sortable
 php artisan o:c
 php artisan migrate
 php artisan passport:install
+php artisan love:reaction-type-add --default
 php artisan db:seed --class=TestingSeeder
 composer dump-autoload
 ```

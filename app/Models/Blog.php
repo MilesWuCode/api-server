@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,11 +14,12 @@ use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
-class Blog extends Model implements HasMedia
+class Blog extends Model implements HasMedia, ReactableInterface
 {
     use HasTags;
     use HasFactory;
     use InteractsWithMedia;
+    use Reactable;
 
     protected $fillable = [
         'user_id',
@@ -58,7 +61,7 @@ class Blog extends Model implements HasMedia
         $this->addMediaCollection('gallery')
             ->acceptsMimeTypes(['image/jpeg'])
             ->registerMediaConversions(function (Media $media) {
-            /**
+                /**
              * ->border(10, 'black', Manipulations::BORDER_OVERLAY)
              * ->crop('crop-center', 400, 400)
              * ->greyscale()
@@ -91,5 +94,19 @@ class Blog extends Model implements HasMedia
     {
         return $this->morphMany(config('media-library.media_model'), 'model')
             ->where('collection_name', 'gallery');
+    }
+
+    public function getLikeAttribute()
+    {
+        return $this->viaLoveReactant()
+            ->getReactionCounterOfType('Like')
+            ->getCount();
+    }
+
+    public function getDislikeAttribute()
+    {
+        return $this->viaLoveReactant()
+            ->getReactionCounterOfType('Dislike')
+            ->getCount();
     }
 }
