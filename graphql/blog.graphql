@@ -23,6 +23,7 @@ extend type Query {
 
     blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
         @paginate
+        # @paginate(type:CONNECTION)
 
     myBlog(id: ID @eq): Blog @find @whereAuth(relation: "user") @guard
 
