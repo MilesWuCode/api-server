@@ -9,6 +9,10 @@ type Todo {
 
 extend type Query {
     myTodo(id: ID @eq): Todo @find @whereAuth(relation: "user") @guard
+    myTodos(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Todo!]!
+        @whereAuth(relation: "user")
+        @guard
+        @paginate
 }
 
 extend type Mutation {

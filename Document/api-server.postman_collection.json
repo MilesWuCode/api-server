@@ -12,672 +12,6 @@
 					"name": "Auth",
 					"item": [
 						{
-							"name": "Todo",
-							"item": [
-								{
-									"name": "List",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/todo?page=2&limit=2&sort=id_desc",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"todo"
-											],
-											"query": [
-												{
-													"key": "page",
-													"value": "2"
-												},
-												{
-													"key": "limit",
-													"value": "2"
-												},
-												{
-													"key": "sort",
-													"value": "id_desc"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "content",
-													"value": "abc",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/todo",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"todo"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/todo/27",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"todo",
-												"27"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Update",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "content",
-													"value": "test",
-													"type": "text"
-												},
-												{
-													"key": "active",
-													"value": "1",
-													"type": "text"
-												},
-												{
-													"key": "_method",
-													"value": "PUT",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/todo/26",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"todo",
-												"26"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "_method",
-													"value": "DELETE",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/todo/19",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"todo",
-												"19"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "Blog",
-							"item": [
-								{
-									"name": "List",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog?page=1&limit=2&sort=id_desc&include=tags",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog"
-											],
-											"query": [
-												{
-													"key": "page",
-													"value": "1"
-												},
-												{
-													"key": "limit",
-													"value": "2"
-												},
-												{
-													"key": "sort",
-													"value": "id_desc"
-												},
-												{
-													"key": "include",
-													"value": "tags"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "title",
-													"value": "abcdefg",
-													"type": "text"
-												},
-												{
-													"key": "body",
-													"value": "ggg",
-													"type": "text"
-												},
-												{
-													"key": "publish_at",
-													"value": "2021-11-08",
-													"type": "text"
-												},
-												{
-													"key": "status",
-													"value": "1",
-													"type": "text"
-												},
-												{
-													"key": "tags",
-													"value": "",
-													"description": "空值清空用",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[0]",
-													"value": "a1",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[1]",
-													"value": "b2",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[2]",
-													"value": "c3",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[3]",
-													"value": "d4",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[4]",
-													"value": "e5",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[5]",
-													"value": "f6",
-													"description": "最多5個",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "gallery[0]",
-													"value": "CyvpEVcO4Iub8up41H16f5ALncT6hG8P3OD5B52e.jpg",
-													"type": "text"
-												},
-												{
-													"key": "gallery[1]",
-													"value": "temporary/siLO19IWTfteOtzZMCaXZP7VJJCQV4F7l5Z1KS59.jpg",
-													"type": "text",
-													"disabled": true
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog?include=tags,gallery,illustration",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog"
-											],
-											"query": [
-												{
-													"key": "include",
-													"value": "tags,gallery,illustration"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery,illustration",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog",
-												"240"
-											],
-											"query": [
-												{
-													"key": "include",
-													"value": "tags,gallery,illustration"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Update",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "_method",
-													"value": "PUT",
-													"type": "text"
-												},
-												{
-													"key": "title",
-													"value": "abcdefg",
-													"type": "text"
-												},
-												{
-													"key": "body",
-													"value": "ggg",
-													"type": "text"
-												},
-												{
-													"key": "publish_at",
-													"value": "2021-11-08",
-													"type": "text"
-												},
-												{
-													"key": "status",
-													"value": "1",
-													"type": "text"
-												},
-												{
-													"key": "tags",
-													"value": "",
-													"description": "空值清空用",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "tags[0]",
-													"value": "a1",
-													"type": "text"
-												},
-												{
-													"key": "tags[1]",
-													"value": "b2",
-													"type": "text"
-												},
-												{
-													"key": "tags[2]",
-													"value": "c3",
-													"type": "text"
-												},
-												{
-													"key": "tags[3]",
-													"value": "d4",
-													"type": "text"
-												},
-												{
-													"key": "tags[4]",
-													"value": "e5",
-													"type": "text"
-												},
-												{
-													"key": "tags[5]",
-													"value": "f6",
-													"description": "最多5個",
-													"type": "text",
-													"disabled": true
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog",
-												"201"
-											],
-											"query": [
-												{
-													"key": "include",
-													"value": "tags"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "_method",
-													"value": "DELETE",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog/201",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog",
-												"201"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "File",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "collection",
-													"value": "gallery",
-													"type": "text"
-												},
-												{
-													"key": "file",
-													"type": "file",
-													"src": "/Users/miles/Desktop/007/c1.jpg"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{http}}://{{domain}}/api/blog/file",
-											"protocol": "{{http}}",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"api",
-												"blog",
-												"file"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
 							"name": "註冊",
 							"event": [
 								{
@@ -1061,6 +395,672 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Todo",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo?page=2&limit=2&sort=id_desc",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "id_desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "content",
+											"value": "abc",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo/27",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo",
+										"27"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "content",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "active",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo/26",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo",
+										"26"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "DELETE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo/19",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo",
+										"19"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Blog",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog?page=1&limit=2&sort=id_desc&include=tags",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "id_desc"
+										},
+										{
+											"key": "include",
+											"value": "tags"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "abcdefg",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "ggg",
+											"type": "text"
+										},
+										{
+											"key": "publish_at",
+											"value": "2021-11-08",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "",
+											"description": "空值清空用",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[0]",
+											"value": "a1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[1]",
+											"value": "b2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[2]",
+											"value": "c3",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[3]",
+											"value": "d4",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[4]",
+											"value": "e5",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[5]",
+											"value": "f6",
+											"description": "最多5個",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "gallery[0]",
+											"value": "CyvpEVcO4Iub8up41H16f5ALncT6hG8P3OD5B52e.jpg",
+											"type": "text"
+										},
+										{
+											"key": "gallery[1]",
+											"value": "temporary/siLO19IWTfteOtzZMCaXZP7VJJCQV4F7l5Z1KS59.jpg",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog?include=tags,gallery,illustration",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "tags,gallery,illustration"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery,illustration",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "tags,gallery,illustration"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "abcdefg",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "ggg",
+											"type": "text"
+										},
+										{
+											"key": "publish_at",
+											"value": "2021-11-08",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "",
+											"description": "空值清空用",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tags[0]",
+											"value": "a1",
+											"type": "text"
+										},
+										{
+											"key": "tags[1]",
+											"value": "b2",
+											"type": "text"
+										},
+										{
+											"key": "tags[2]",
+											"value": "c3",
+											"type": "text"
+										},
+										{
+											"key": "tags[3]",
+											"value": "d4",
+											"type": "text"
+										},
+										{
+											"key": "tags[4]",
+											"value": "e5",
+											"type": "text"
+										},
+										{
+											"key": "tags[5]",
+											"value": "f6",
+											"description": "最多5個",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"201"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "tags"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "DELETE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/201",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"201"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "File",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "collection",
+											"value": "gallery",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/miles/Desktop/007/c1.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/file",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"file"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -1123,8 +1123,8 @@
 								"body": {
 									"mode": "graphql",
 									"graphql": {
-										"query": "query {\n  blogs(first: 3, page: 1, orderBy: { column: ID, order: ASC }) {\n    data {\n      id\n      title\n    }\n    paginatorInfo {\n      total\n    }\n  }\n}\n",
-										"variables": ""
+										"query": "query blogs($first: Int!, $page: Int, $column: QueryBlogsOrderByColumn!, $order:SortOrder!) {\n  blogs(first: $first, page: $page, orderBy: { column: $column, order: $order }) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      currentPage\n      lastPage\n    }\n  }\n}\n",
+										"variables": "{\n  \"first\": 3,\n  \"page\": 1,\n  \"column\": \"CREATED_AT\",\n  \"order\": \"ASC\"\n}"
 									}
 								},
 								"url": {
@@ -1158,8 +1158,43 @@
 								"body": {
 									"mode": "graphql",
 									"graphql": {
-										"query": "query {\n  myTodo(id: 201) {\n    id\n    content\n    active\n  }\n}\n",
-										"variables": ""
+										"query": "query myTodo($id: ID!) {\n  myTodo(id: $id) {\n    id\n    content\n    active\n    created_at\n    updated_at\n  }\n}\n",
+										"variables": "{\n  \"id\": 204\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "myTodos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query myTodos($first: Int!, $page: Int) {\n  myTodos(first: $first, page: $page) {\n    data {\n      id\n      content\n      active\n      created_at\n      updated_at\n    }\n  }\n}\n",
+										"variables": "{\n  \"first\": 3,\n  \"page\": 1\n}"
 									}
 								},
 								"url": {

@@ -1,6 +1,5 @@
 type Blog {
     id: ID!
-    user: User! @belongsTo(relation: "user")
     title: String!
     body: String!
     status: Boolean!
@@ -8,7 +7,17 @@ type Blog {
     created_at: DateTime!
     updated_at: DateTime!
 
-    tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
+    user: User! @belongsTo(relation: "user")
+
+    # model get attribute
+    like_count: Int! @with(relation: "loveReactant.reactionCounters")
+    dislike_count: Int! @with(relation: "loveReactant.reactionCounters")
+
+    # call function
+    # like_count: Int! @with(relation: "loveReactant.reactionCounters") @field(resolver: "\\App\\GraphQL\\Types\\LoveType@getLikeCount")
+    # dislike_count: Int! @with(relation: "loveReactant.reactionCounters") @field(resolver: "\\App\\GraphQL\\Types\\LoveType@getDislikeCount")
+
+    tag(orderBy: _ @orderBy(columns: ["id", "created_at"], column: "id")): [Tag!]!
         @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 3)
 
     illustration: [Media!]
@@ -23,7 +32,7 @@ extend type Query {
 
     blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
         @paginate
-        # @paginate(type:CONNECTION)
+    # @paginate(type:CONNECTION)
 
     myBlog(id: ID @eq): Blog @find @whereAuth(relation: "user") @guard
 
