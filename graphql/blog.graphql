@@ -17,7 +17,7 @@ type Blog {
     # like_count: Int! @with(relation: "loveReactant.reactionCounters") @field(resolver: "\\App\\GraphQL\\Types\\LoveType@getLikeCount")
     # dislike_count: Int! @with(relation: "loveReactant.reactionCounters") @field(resolver: "\\App\\GraphQL\\Types\\LoveType@getDislikeCount")
 
-    tag(orderBy: _ @orderBy(columns: ["id", "created_at"], column: "id")): [Tag!]!
+    tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
         @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 3)
 
     illustration: [Media!]
