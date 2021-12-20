@@ -99,6 +99,9 @@ php artisan tinker
 # run test
 php artisan test --testsuite=Feature --stop-on-failure
 
+# run test
+sail php artisan test --filter test_create tests/Feature/Models/BlogTest.php
+
 # 可以直接使用.env.testing來執行測試
 cp .env .env.testing
 ```

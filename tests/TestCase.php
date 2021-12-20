@@ -15,5 +15,6 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         Artisan::call('db:seed --class=TestingSeeder');
         Artisan::call('passport:install');
+        Artisan::call('love:reaction-type-add --default');
     }
 }

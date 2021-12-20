@@ -43,7 +43,7 @@ class BlogController extends Controller
 
         $blogs = $request->user()
             ->blogs()
-            ->with('tags')
+            ->with(['tags', 'loveReactant.reactionCounters'])
             ->orderBy($column, $order)
             ->paginate($limit, ['*'], 'page', $page);
 

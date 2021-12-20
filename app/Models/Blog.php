@@ -98,6 +98,7 @@ class Blog extends Model implements HasMedia, ReactableInterface
 
     public function getLikeCountAttribute()
     {
+        // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
         return $this->viaLoveReactant()
             ->getReactionCounterOfType('Like')
             ->getCount();
@@ -105,6 +106,7 @@ class Blog extends Model implements HasMedia, ReactableInterface
 
     public function getDislikeCountAttribute()
     {
+        // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
         return $this->viaLoveReactant()
             ->getReactionCounterOfType('Dislike')
             ->getCount();
