@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3e8ad88d-3958-4cd1-afba-3d960635c822",
+		"_postman_id": "604f86fe-4640-49ab-ab58-55daa5165dd3",
 		"name": "api-server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1139,7 +1139,12 @@
 								}
 							},
 							"response": []
-						},
+						}
+					]
+				},
+				{
+					"name": "todo",
+					"item": [
 						{
 							"name": "myTodo",
 							"request": {
@@ -1209,12 +1214,113 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "createTodo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation createTodo($content: String!) {\n  createTodo(content: $content) {\n    ...todo\n  }\n}",
+										"variables": "{\n  \"content\": \"Test...\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateTodo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation updateTodo($id: ID!, $content: String) {\n  updateTodo(id: $id, content: $content) {\n    ...todo\n  }\n}\n",
+										"variables": "{\n  \"id\": 204,\n  \"content\": \"Try...\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteTodo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation deleteTodo($id: ID!) {\n  deleteTodo(id: $id) {\n    ...todo\n  }\n}\n",
+										"variables": "{\n  \"id\": 204\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				},
-				{
-					"name": "Mutation",
-					"item": []
 				}
 			]
 		}
