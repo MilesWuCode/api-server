@@ -30,12 +30,14 @@ extend type Mutation {
         email: String
             @rules(
                 apply: ["required", "email", "unique:users,email"]
+                # 也可以定義在這裡：resources/lang/en/validation.php:attributes
                 attribute: "e-mail"
             )
         password: String! @rules(apply: ["required", "min:8"])
         comfirm_password: String!
             @rules(
                 apply: ["required", "same:password"]
+                # 也可以定義在這裡：resources/lang/en/validation.php:attributes
                 attribute: "comfirm-password"
             )
     ): User @field(resolver: "RegisterUser")
