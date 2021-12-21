@@ -60,3 +60,7 @@ FRONTEND_EMAIL_VERIFY_URL="${FRONTEND_URL}/email/verify"
 
 # laravel-medialibrary
 MEDIA_DISK=media
+
+# sentry
+SENTRY_LARAVEL_DSN=
+SENTRY_TRACES_SAMPLE_RATE=1.0

@@ -2,8 +2,15 @@
 
 ## List
 
--   laravel passport
--   laravel lighthouse
+-   laravel 8
+-   laravel/passport
+-   nuwave/lighthouse
+-   beyondcode/laravel-query-detector
+-   spatie/laravel-tags
+-   spatie/laravel-fractal
+-   spatie/laravel-medialibrary
+-   cybercog/laravel-love
+-   sentry/sentry-laravel
 
 ## Run
 

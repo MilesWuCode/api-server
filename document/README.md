@@ -90,6 +90,17 @@ config/auth.php
     ],
 ```
 
+config/cors.php
+
+```diff
+    'paths' => [
+        'api/*',
+        'graphql',
+        'sanctum/csrf-cookie',
++        'oauth/*',
+    ],
+```
+
 ## Test
 
 ```sh
@@ -143,13 +154,15 @@ export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 # export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 ```
 
-## Todo
+## Make Model
 
 ```sh
 php artisan make:model Todo -a --api --test
 ```
 
-## N+1 check
+## beyondcode/laravel-query-detector
+
+-   N+1 check
 
 ```sh
 # install
@@ -159,7 +172,7 @@ composer require beyondcode/laravel-query-detector --dev
 php artisan vendor:publish --provider="BeyondCode\QueryDetector\QueryDetectorServiceProvider"
 ```
 
-## laravel-tags
+## spatie/laravel-tags
 
 ```sh
 # install
@@ -175,7 +188,7 @@ php artisan migrate
 php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-config"
 ```
 
-## laravel-fractal
+## spatie/laravel-fractal
 
 ```sh
 # install
@@ -188,7 +201,7 @@ php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider"
 php artisan make:transformer UserTransformer
 ```
 
-## laravel-medialibrary
+## spatie/laravel-medialibrary
 
 ```sh
 # install
@@ -225,33 +238,49 @@ MEDIA_DISK=media
 composer require laravelista/comments
 ```
 
-## cybercog/laravel-love(wip)
+## cybercog/laravel-love
 
 ```sh
-#
+# install
 composer require cybercog/laravel-love
 
-#
+# migrate
 php artisan migrate
 
-#
+# default: like, dislike
 php artisan love:reaction-type-add --default
 
-#
+# set model,migrate
 sail php artisan love:setup-reacterable --model="App\Models\User" --nullable
 sail php artisan migrate
 sail php artisan love:register-reacters --model="App\Models\User"
 
-#
+# set model,migrate
 sail php artisan love:setup-reactable --model="App\Models\Blog" --nullable
 sail php artisan migrate
 sail php artisan love:register-reactants --model="App\Models\Blog"
 ```
 
-## sentry/sentry-laravel(wip)
+## sentry/sentry-laravel
 
 ```sh
 composer require sentry/sentry-laravel
+```
+
+```diff
+# App/Exceptions/Handler.php
++   public function report(Throwable $exception)
++   {
++       if (app()->bound('sentry') && $this->shouldReport($exception)) {
++           app('sentry')->captureException($exception);
++       }
++
++       parent::report($exception);
++   }
+```
+
+```sh
+php artisan sentry:publish --dsn=xxxx
 ```
 
 ## spatie/laravel-responsecache(wip)
