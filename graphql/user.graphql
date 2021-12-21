@@ -21,5 +21,27 @@ extend type Query {
 
     user(id: ID @eq): User @find
 
-    users: [User!]! @paginate(defaultCount: 10)
+    users: [User!]! @paginate(defaultCount: 10, scopes: ["verified"])
+}
+
+extend type Mutation {
+    registerUser(
+        name: String! @rules(apply: ["required", "max:100"])
+        email: String
+            @rules(
+                apply: ["required", "email", "unique:users,email"]
+                attribute: "e-mail"
+            )
+        password: String! @rules(apply: ["required", "min:8"])
+        comfirm_password: String!
+            @rules(
+                apply: ["required", "same:password"]
+                attribute: "comfirm-password"
+            )
+    ): User @create(model: "App\\Models\\User")
+
+    # changePassword(
+    #     oldPassword: String! @rules(apply: ["required", "current_password:api"])
+    #     password: String! @rules(apply: ["required", "min:8"])
+    # ): User
 }

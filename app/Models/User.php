@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
+use Laravel\Passport\HasApiTokens;
 use App\Notifications\CustomVerifyEmail;
-use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
-use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-// use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 
 class User extends Authenticatable implements MustVerifyEmail, HasMedia, ReacterableInterface
 {
@@ -53,11 +54,17 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Reacter
         'email_verified_at' => 'datetime',
     ];
 
+    // vendor/laravel/passport/src/Bridge/UserRepository.php
     public function findForPassport($username)
     {
         return $this->where('email', $username)
             ->whereNotNull('email_verified_at')
             ->first();
+    }
+
+    public function scopeVerified(Builder $query): Builder
+    {
+        return $query->whereNotNull('email_verified_at');
     }
 
     /**
