@@ -283,6 +283,15 @@ composer require sentry/sentry-laravel
 php artisan sentry:publish --dsn=xxxx
 ```
 
+## mll-lab/graphql-php-scalars
+```sh
+composer require mll-lab/graphql-php-scalars
+```
+[schema.graphql](../graphql/schema.graphql)
+```diff
++   scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
+```
+
 ## spatie/laravel-responsecache(wip)
 
 ```sh
