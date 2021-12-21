@@ -38,7 +38,7 @@ extend type Mutation {
                 apply: ["required", "same:password"]
                 attribute: "comfirm-password"
             )
-    ): User @create(model: "App\\Models\\User")
+    ): User @field(resolver: "RegisterUser")
 
     # changePassword(
     #     oldPassword: String! @rules(apply: ["required", "current_password:api"])
