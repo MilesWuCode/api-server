@@ -28,7 +28,7 @@ class UpdateBlogRequest extends FormRequest
             'body' => 'sometimes|nullable|max:2000',
             'status' => 'sometimes|required|boolean',
             'publish_at' => 'sometimes|nullable|date',
-            'tags' => 'sometimes|array|nullable|max:5',
+            'tags' => 'sometimes|array|nullable|max:6',
             'tags.*' => 'required',
         ];
     }

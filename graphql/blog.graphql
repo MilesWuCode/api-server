@@ -46,8 +46,15 @@ extend type Mutation {
     createBlog(
         title: String! @rules(apply: ["required", "string", "max:100"])
         body: String! @rules(apply: ["required", "string", "max:100"])
+        tag: [String]
+            @rulesForArray(apply: ["max:6"])
+            @rules(apply: ["sometimes", "required"])
+        gallery: [String]
+            @rulesForArray(apply: ["max:2"])
+            @rules(apply: ["sometimes", "required", "App\\Rules\\FileExist"])
     ): Blog
-        @create(model: "App\\Models\\Blog")
+        # @create(model: "App\\Models\\Blog")
+        @field(resolver: "Blog@create")
         @guard
         @can(ability: "create")
         @inject(context: "user.id", name: "user_id")

@@ -29,7 +29,7 @@ class StoreBlogRequest extends FormRequest
             'body' => 'nullable|max:2000',
             'status' => 'required|boolean',
             'publish_at' => 'nullable|date',
-            'tags' => 'sometimes|array|nullable|max:5',
+            'tags' => 'sometimes|array|nullable|max:6',
             'tags.*' => 'required|string',
             'illustration' => 'sometimes|array',
             'illustration.*' => ['required', 'string', new FileExist],
