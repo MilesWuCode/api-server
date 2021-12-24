@@ -29,11 +29,11 @@ class StoreBlogRequest extends FormRequest
             'body' => 'nullable|max:2000',
             'status' => 'required|boolean',
             'publish_at' => 'nullable|date',
+            // tag:"" is clear
             'tags' => 'sometimes|array|nullable|max:6',
             'tags.*' => 'required|string',
-            'illustration' => 'sometimes|array',
-            'illustration.*' => ['required', 'string', new FileExist],
-            'gallery' => 'sometimes|array',
+            // gallery:file name
+            'gallery' => 'sometimes|array|max:10',
             'gallery.*' => ['required', 'string', new FileExist],
         ];
     }

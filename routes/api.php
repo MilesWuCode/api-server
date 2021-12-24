@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +47,4 @@ Route::middleware('auth:api')->apiResource('blog', BlogController::class);
 
 
 // BlogFile
-Route::middleware('auth:api')->post('/blog/file', [BlogController::class, 'file']);
+Route::middleware('auth:api')->post('/file', [FileController::class, 'file']);

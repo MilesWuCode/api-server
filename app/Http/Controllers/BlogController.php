@@ -142,16 +142,4 @@ class BlogController extends Controller
     {
         return response($blog->delete(), 200);
     }
-
-    /**
-     * Post File
-     *
-     * @param  \App\Http\Requests\FileBlogRequest  $request
-     */
-    public function file(FileBlogRequest $request)
-    {
-        $fileName = basename($request->file('file')->store('temporary'));
-
-        return response()->json(['file' => $fileName], 200);
-    }
 }
