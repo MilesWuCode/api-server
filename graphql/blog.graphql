@@ -1,7 +1,7 @@
 type Blog {
     id: ID!
     title: String!
-    body: String!
+    body: String
     status: Boolean!
     publish_at: Date
     created_at: DateTime!
@@ -19,9 +19,6 @@ type Blog {
 
     tag(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Tag!]!
         @morphMany(relation: "tags", type: PAGINATOR, defaultCount: 3)
-
-    illustration: [Media!]
-        @morphMany(relation: "illustration", type: PAGINATOR, defaultCount: 3)
 
     gallery: [Media!]
         @morphMany(relation: "gallery", type: PAGINATOR, defaultCount: 3)
@@ -45,7 +42,7 @@ extend type Query {
 extend type Mutation {
     createBlog(
         title: String! @rules(apply: ["required", "string", "max:100"])
-        body: String! @rules(apply: ["required", "string", "max:100"])
+        body: String @rules(apply: ["sometimes", "required", "string", "max:100"])
         tag: [String]
             @rules(apply: ["sometimes", "required"])
             @rulesForArray(apply: ["sometimes", "max:6"])
