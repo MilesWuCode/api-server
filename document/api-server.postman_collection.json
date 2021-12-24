@@ -1197,7 +1197,7 @@
 			"name": "GraphQL",
 			"item": [
 				{
-					"name": "Query",
+					"name": "User",
 					"item": [
 						{
 							"name": "me",
@@ -1233,46 +1233,11 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "blogs",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "graphql",
-									"graphql": {
-										"query": "query blogs($first: Int!, $page: Int, $column: QueryBlogsOrderByColumn!, $order:SortOrder!) {\n  blogs(first: $first, page: $page, orderBy: { column: $column, order: $order }) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      currentPage\n      lastPage\n    }\n  }\n}\n",
-										"variables": "{\n  \"first\": 3,\n  \"page\": 1,\n  \"column\": \"CREATED_AT\",\n  \"order\": \"ASC\"\n}"
-									}
-								},
-								"url": {
-									"raw": "{{http}}://{{domain}}/graphql",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"graphql"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
 				{
-					"name": "todo",
+					"name": "Todo",
 					"item": [
 						{
 							"name": "myTodo",
@@ -1399,6 +1364,116 @@
 									"graphql": {
 										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation updateTodo($id: ID!, $content: String) {\n  updateTodo(id: $id, content: $content) {\n    ...todo\n  }\n}\n",
 										"variables": "{\n  \"id\": 204,\n  \"content\": \"Try...\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Blog",
+					"item": [
+						{
+							"name": "blogs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query blogs($first: Int!, $page: Int, $column: QueryBlogsOrderByColumn!, $order:SortOrder!) {\n  blogs(first: $first, page: $page, orderBy: { column: $column, order: $order }) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      currentPage\n      lastPage\n    }\n  }\n}\n",
+										"variables": "{\n  \"first\": 3,\n  \"page\": 1,\n  \"column\": \"CREATED_AT\",\n  \"order\": \"ASC\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "myBlogs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query myBlogs(\n  $first: Int!\n  $page: Int\n  $column: QueryMyBlogsOrderByColumn!\n  $order: SortOrder!\n) {\n  myBlogs(\n    first: $first\n    page: $page\n    orderBy: { column: $column, order: $order }\n  ) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      currentPage\n      lastPage\n    }\n  }\n}\n",
+										"variables": "{\n  \"first\": 3,\n  \"page\": 1,\n  \"column\": \"CREATED_AT\",\n  \"order\": \"ASC\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createBlog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation createBlog(\n  $title: String!\n  $body: String\n  $tag: [String!]\n  $gallery: [String!]\n) {\n  createBlog(title: $title, body: $body, tag: $tag, gallery: $gallery) {\n    id\n    title\n    body\n    status\n    tag {\n      data {\n        id\n        name\n      }\n    }\n    gallery {\n      data {\n        id\n        url\n      }\n    }\n  }\n}\n",
+										"variables": "{\n  \"title\": \"title try...\",\n  \"body\": \"body try...\",\n  \"tag\": [\"abc\", \"def\"],\n  \"gallery\": [\"{{temporary_file}}\"]\n}"
 									}
 								},
 								"url": {
