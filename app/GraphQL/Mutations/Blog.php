@@ -4,7 +4,6 @@ namespace App\GraphQL\Mutations;
 
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
 class Blog
@@ -26,7 +25,7 @@ class Blog
 
         $blog->setTag($args['tag'] ?? []);
 
-        $blog->setGallery($args['gallery'] ?? []);
+        $blog->setFile('gallery', $args['gallery'] ?? []);
 
         return $blog;
     }

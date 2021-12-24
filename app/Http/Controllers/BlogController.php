@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogFileAddRequest;
+use App\Http\Requests\BlogFileDelRequest;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
@@ -56,7 +58,7 @@ class BlogController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBlogRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreBlogRequest $request): JsonResponse
     {
@@ -66,7 +68,7 @@ class BlogController extends Controller
             $blog->setTag($request->input('tag') ?? []);
         }
 
-        $blog->setGallery($request->input('gallery') ?? []);
+        $blog->setFile('gallery', $request->input('gallery') ?? []);
 
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
@@ -79,7 +81,7 @@ class BlogController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Blog $blog): JsonResponse
     {
@@ -95,7 +97,7 @@ class BlogController extends Controller
      *
      * @param  \App\Http\Requests\UpdateBlogRequest  $request
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateBlogRequest $request, Blog $blog): JsonResponse
     {
@@ -121,5 +123,37 @@ class BlogController extends Controller
     public function destroy(Blog $blog): Response
     {
         return response($blog->delete(), 200);
+    }
+
+    /**
+     * File add
+     *
+     * @param BlogFileAddRequest $request
+     * @param Blog $blog
+     * @return JsonResponse
+     */
+    public function fileAdd(BlogFileAddRequest $request, Blog $blog): JsonResponse
+    {
+        $blog->setFile($request->input('collection'), [$request->input('file')]);
+
+        return Fractal::create($blog, new BlogTransformer())
+            ->parseIncludes($request->input('collection'))
+            ->respond();
+    }
+
+    /**
+     * File delete
+     *
+     * @param BlogFileDelRequest $request
+     * @param Blog $blog
+     * @return Response
+     */
+    public function fileDel(BlogFileDelRequest $request, Blog $blog): Response
+    {
+        $mediaItems = $blog->getMedia($request->input('collection'));
+
+        $mediaItem = $mediaItems->where('id', $request->input('media_id'))->first();
+
+        return response($mediaItem->delete(), 200);
     }
 }

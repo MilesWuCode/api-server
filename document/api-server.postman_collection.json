@@ -734,44 +734,43 @@
 											"type": "text"
 										},
 										{
-											"key": "tags",
+											"key": "tag",
 											"value": "",
 											"description": "空值清空用",
 											"type": "text",
 											"disabled": true
 										},
 										{
-											"key": "tags[0]",
+											"key": "tag[0]",
 											"value": "a1",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										},
 										{
-											"key": "tags[1]",
+											"key": "tag[1]",
 											"value": "b2",
 											"type": "text",
 											"disabled": true
 										},
 										{
-											"key": "tags[2]",
+											"key": "tag[2]",
 											"value": "c3",
 											"type": "text",
 											"disabled": true
 										},
 										{
-											"key": "tags[3]",
+											"key": "tag[3]",
 											"value": "d4",
 											"type": "text",
 											"disabled": true
 										},
 										{
-											"key": "tags[4]",
+											"key": "tag[4]",
 											"value": "e5",
 											"type": "text",
 											"disabled": true
 										},
 										{
-											"key": "tags[5]",
+											"key": "tag[5]",
 											"value": "f6",
 											"description": "最多5個",
 											"type": "text",
@@ -779,7 +778,7 @@
 										},
 										{
 											"key": "gallery[0]",
-											"value": "CyvpEVcO4Iub8up41H16f5ALncT6hG8P3OD5B52e.jpg",
+											"value": "MTzRgoIEmuyXIg7s1e50vsAbjxisQTurhwFWyOMW.jpg",
 											"type": "text"
 										},
 										{
@@ -787,11 +786,17 @@
 											"value": "temporary/siLO19IWTfteOtzZMCaXZP7VJJCQV4F7l5Z1KS59.jpg",
 											"type": "text",
 											"disabled": true
+										},
+										{
+											"key": "gallery",
+											"value": "",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog?include=tags,gallery,illustration",
+									"raw": "{{http}}://{{domain}}/api/blog?include=tag,gallery",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -803,7 +808,7 @@
 									"query": [
 										{
 											"key": "include",
-											"value": "tags,gallery,illustration"
+											"value": "tag,gallery"
 										}
 									]
 								}
@@ -921,17 +926,20 @@
 										{
 											"key": "tags[2]",
 											"value": "c3",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "tags[3]",
 											"value": "d4",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "tags[4]",
 											"value": "e5",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "tags[5]",
@@ -943,7 +951,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/201?include=tags",
+									"raw": "{{http}}://{{domain}}/api/blog/240?include=tag,gallery",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -951,12 +959,12 @@
 									"path": [
 										"api",
 										"blog",
-										"201"
+										"240"
 									],
 									"query": [
 										{
 											"key": "include",
-											"value": "tags"
+											"value": "tag,gallery"
 										}
 									]
 								}
@@ -1010,7 +1018,7 @@
 							"response": []
 						},
 						{
-							"name": "File",
+							"name": "File Add",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1040,13 +1048,13 @@
 										},
 										{
 											"key": "file",
-											"type": "file",
-											"src": "/Users/miles/Desktop/007/c1.jpg"
+											"value": "{{temporary_file}}",
+											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/file",
+									"raw": "{{http}}://{{domain}}/api/blog/240/file",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -1054,6 +1062,127 @@
 									"path": [
 										"api",
 										"blog",
+										"240",
+										"file"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "File Del",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "DELETE",
+											"type": "text"
+										},
+										{
+											"key": "collection",
+											"value": "gallery",
+											"type": "text"
+										},
+										{
+											"key": "media_id",
+											"value": "8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240/file",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240",
+										"file"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "File",
+					"item": [
+						{
+							"name": "File Upload To Temporary",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const {file} = JSON.parse(responseBody);",
+											"",
+											"postman.setEnvironmentVariable('temporary_file', file);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/miles/Desktop/007/c5.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/file",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
 										"file"
 									]
 								}
@@ -1270,41 +1399,6 @@
 									"graphql": {
 										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation updateTodo($id: ID!, $content: String) {\n  updateTodo(id: $id, content: $content) {\n    ...todo\n  }\n}\n",
 										"variables": "{\n  \"id\": 204,\n  \"content\": \"Try...\"\n}"
-									}
-								},
-								"url": {
-									"raw": "{{http}}://{{domain}}/graphql",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"graphql"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "deleteTodo",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "graphql",
-									"graphql": {
-										"query": "fragment todo on Todo {\n  id\n  content\n  active\n  created_at\n  updated_at\n}\n\nmutation deleteTodo($id: ID!) {\n  deleteTodo(id: $id) {\n    ...todo\n  }\n}\n",
-										"variables": "{\n  \"id\": 204\n}"
 									}
 								},
 								"url": {

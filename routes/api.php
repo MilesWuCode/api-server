@@ -33,7 +33,12 @@ Route::middleware('auth:api')->get('/user', [UserController::class, 'show']);
 Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout']);
 // TODO
 Route::middleware('auth:api')->apiResource('todo', TodoController::class);
+
+// Blog
 Route::middleware('auth:api')->apiResource('blog', BlogController::class);
+// Blog:id/add,del
+Route::middleware('auth:api')->post('blog/{blog}/file', [BlogController::class, 'fileAdd']);
+Route::middleware('auth:api')->delete('blog/{blog}/file', [BlogController::class, 'fileDel']);
 
 // PUBLIC
 // Route::group(function () {
@@ -45,6 +50,5 @@ Route::middleware('auth:api')->apiResource('blog', BlogController::class);
 //     //
 // });
 
-
-// BlogFile
+// Temporary File
 Route::middleware('auth:api')->post('/file', [FileController::class, 'file']);

@@ -96,11 +96,11 @@ class Blog extends Model implements HasMedia, ReactableInterface
         return $this;
     }
 
-    public function setGallery(array $gallery = [])
+    public function setFile(string $collection, array $files = [])
     {
-        foreach ($gallery as $file) {
+        foreach ($files as $file) {
             if (Storage::disk('temporary')->exists($file)) {
-                $this->addMediaFromDisk($file, 'temporary')->toMediaCollection('gallery');
+                $this->addMediaFromDisk($file, 'temporary')->toMediaCollection($collection);
             }
         }
 
