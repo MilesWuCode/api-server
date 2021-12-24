@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogFileAddRequest;
 use App\Http\Requests\BlogFileDelRequest;
-use App\Http\Requests\StoreBlogRequest;
-use App\Http\Requests\UpdateBlogRequest;
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Transformers\BlogTransformer;
 use Illuminate\Http\JsonResponse;
@@ -57,10 +57,10 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBlogRequest  $request
+     * @param  \App\Http\Requests\BlogStoreRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBlogRequest $request): JsonResponse
+    public function store(BlogStoreRequest $request): JsonResponse
     {
         $blog = $request->user()->blogs()->create($request->all());
 
@@ -95,11 +95,11 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBlogRequest  $request
+     * @param  \App\Http\Requests\BlogUpdateRequest  $request
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateBlogRequest $request, Blog $blog): JsonResponse
+    public function update(BlogUpdateRequest $request, Blog $blog): JsonResponse
     {
         $blog->update($request->all());
 
