@@ -837,7 +837,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery,illustration",
+									"raw": "{{http}}://{{domain}}/api/blog/289?include=tags,gallery",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -845,12 +845,12 @@
 									"path": [
 										"api",
 										"blog",
-										"240"
+										"289"
 									],
 									"query": [
 										{
 											"key": "include",
-											"value": "tags,gallery,illustration"
+											"value": "tags,gallery"
 										}
 									]
 								}
