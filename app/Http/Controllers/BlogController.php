@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileBlogRequest;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
@@ -10,7 +9,6 @@ use App\Transformers\BlogTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Fractal\Facades\Fractal;
 
@@ -35,9 +33,9 @@ class BlogController extends Controller
             'sort' => 'sometimes|in:id_asc,id_desc,updated_at_asc,updated_at_desc',
         ])->validate();
 
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 5);
-        $sort = $request->get('sort', 'id_asc');
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 5);
+        $sort = $request->input('sort', 'id_asc');
 
         [$column, $order] = preg_split('/_(?=(asc|desc)$)/', $sort);
 
@@ -49,7 +47,7 @@ class BlogController extends Controller
 
         return Fractal::create($blogs, new BlogTransformer())
         // 手動includes
-        // ->parseIncludes('tags')
+        // ->parseIncludes('tag')
         // ->includeTags()
             ->respond();
     }
@@ -64,31 +62,15 @@ class BlogController extends Controller
     {
         $blog = $request->user()->blogs()->create($request->all());
 
-        if ($request->has('tags')) {
-            $tags = $request->get('tags');
-
-            $blog->syncTagsWithType(is_array($tags) ? $tags : [], 'blog');
+        if ($request->has('tag')) {
+            $blog->setTag($request->input('tag') ?? []);
         }
 
-        if ($request->has('illustration')) {
-            foreach ($request->get('illustration') as $file) {
-                if (Storage::disk('temporary')->exists($file)) {
-                    $blog->addMediaFromDisk($file, 'temporary')->toMediaCollection('illustration');
-                }
-            }
-        }
-
-        if ($request->has('gallery')) {
-            foreach ($request->get('gallery') as $file) {
-                if (Storage::disk('temporary')->exists($file)) {
-                    $blog->addMediaFromDisk($file, 'temporary')->toMediaCollection('gallery');
-                }
-            }
-        }
+        $blog->setGallery($request->input('gallery') ?? []);
 
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
-        // ->parseIncludes('tags')
+        // ->parseIncludes('tag')
         // ->includeTags()
             ->respond();
     }
@@ -103,7 +85,7 @@ class BlogController extends Controller
     {
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
-        // ->parseIncludes('tags')
+        // ->parseIncludes('tag')
         // ->includeTags()
             ->respond();
     }
@@ -119,15 +101,13 @@ class BlogController extends Controller
     {
         $blog->update($request->all());
 
-        if ($request->has('tags')) {
-            $tags = $request->get('tags');
-
-            $blog->syncTagsWithType(is_array($tags) ? $tags : [], 'blog');
+        if ($request->has('tag')) {
+            $blog->setTag($request->input('tag') ?? []);
         }
 
         return Fractal::create($blog, new BlogTransformer())
         // 手動includes
-        // ->parseIncludes('tags')
+        // ->parseIncludes('tag')
         // ->includeTags()
             ->respond();
     }

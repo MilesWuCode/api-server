@@ -34,9 +34,9 @@ class TodoController extends Controller
             'sort' => 'sometimes|in:id_asc,id_desc,updated_at_asc,updated_at_desc',
         ])->validate();
 
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 5);
-        $sort = $request->get('sort', 'id_asc');
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 5);
+        $sort = $request->input('sort', 'id_asc');
 
         [$column, $order] = preg_split('/_(?=(asc|desc)$)/', $sort);
 

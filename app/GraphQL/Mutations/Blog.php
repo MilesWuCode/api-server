@@ -24,20 +24,9 @@ class Blog
 
         $blog = $user->blogs()->create($args);
 
-        if (count($args['tag']) > 0) {
-            $tags = $args['tag'];
-            $blog->syncTagsWithType(is_array($tags) ? $tags : [], 'blog');
-        }
+        $blog->setTag($args['tag'] ?? []);
 
-        if (count($args['gallery']) > 0) {
-            $gallery = $args['gallery'];
-
-            foreach ($gallery as $file) {
-                if (Storage::disk('temporary')->exists($file)) {
-                    $blog->addMediaFromDisk($file, 'temporary')->toMediaCollection('gallery');
-                }
-            }
-        }
+        $blog->setGallery($args['gallery'] ?? []);
 
         return $blog;
     }

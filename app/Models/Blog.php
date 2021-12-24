@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\File;
@@ -53,12 +54,10 @@ class Blog extends Model implements HasMedia, ReactableInterface
          * ->withResponsiveImages()
          */
 
-        $this->addMediaCollection('illustration')
-            ->acceptsFile(function (File $file) {
-                return $file->mimeType === 'image/jpeg';
-            });
-
         $this->addMediaCollection('gallery')
+        // ->acceptsFile(function (File $file) {
+        //     return $file->mimeType === 'image/jpeg';
+        // })
             ->acceptsMimeTypes(['image/jpeg'])
             ->registerMediaConversions(function (Media $media) {
                 /**
@@ -84,16 +83,28 @@ class Blog extends Model implements HasMedia, ReactableInterface
             ->performOnCollections('gallery');
     }
 
-    public function illustration(): MorphMany
-    {
-        return $this->morphMany(config('media-library.media_model'), 'model')
-            ->where('collection_name', 'illustration');
-    }
-
     public function gallery(): MorphMany
     {
         return $this->morphMany(config('media-library.media_model'), 'model')
             ->where('collection_name', 'gallery');
+    }
+
+    public function setTag(array $tag = [])
+    {
+        $this->syncTagsWithType($tag, 'blog');
+
+        return $this;
+    }
+
+    public function setGallery(array $gallery = [])
+    {
+        foreach ($gallery as $file) {
+            if (Storage::disk('temporary')->exists($file)) {
+                $this->addMediaFromDisk($file, 'temporary')->toMediaCollection('gallery');
+            }
+        }
+
+        return $this;
     }
 
     public function getLikeCountAttribute()

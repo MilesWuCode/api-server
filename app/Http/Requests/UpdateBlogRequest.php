@@ -30,8 +30,8 @@ class UpdateBlogRequest extends FormRequest
             'status' => 'sometimes|required|boolean',
             'publish_at' => 'sometimes|nullable|date',
             // tag:"" is clear
-            'tags' => 'sometimes|array|nullable|max:6',
-            'tags.*' => 'required',
+            'tag' => 'sometimes|array|nullable|max:6',
+            'tag.*' => 'required',
         ];
     }
 }
