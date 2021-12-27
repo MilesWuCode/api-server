@@ -1,6 +1,6 @@
 # Api-Server
 
--   [Detail](document/README.md)
+-   [README](document/README.md)
 -   [Postman File](document)
 ## Packages
 
