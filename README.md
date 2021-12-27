@@ -1,6 +1,8 @@
 # Api-Server
 
-## List
+-   [Detail](document/README.md)
+-   [Postman File](document)
+## Packages
 
 -   laravel 8
 -   laravel/passport
