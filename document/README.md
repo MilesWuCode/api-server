@@ -160,6 +160,19 @@ export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 php artisan make:model Todo -a --api --test
 ```
 
+## barryvdh/laravel-ide-helper
+
+```sh
+composer require --dev barryvdh/laravel-ide-helper
+php artisan ide-helper:generate
+php artisan ide-helper:models
+```
+
+```ini
+# .gitignore
+_ide_helper.php
+```
+
 ## beyondcode/laravel-query-detector
 
 -   N+1 check
@@ -284,10 +297,13 @@ php artisan sentry:publish --dsn=xxxx
 ```
 
 ## mll-lab/graphql-php-scalars
+
 ```sh
 composer require mll-lab/graphql-php-scalars
 ```
+
 [schema.graphql](../graphql/schema.graphql)
+
 ```diff
 +   scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
 ```

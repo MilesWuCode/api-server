@@ -53,6 +53,20 @@ extend type Mutation {
         # @create(model: "App\\Models\\Blog")
         @field(resolver: "Blog@create")
         @guard
-        @can(ability: "create")
+        @can(ability: "create", model: "App\\Models\\Blog")
+        @inject(context: "user.id", name: "user_id")
+
+    updateBlog(
+        id: ID @eq
+        title: String! @rules(apply: ["required", "string", "max:100"])
+        body: String @rules(apply: ["sometimes", "required", "string", "max:100"])
+        tag: [String]
+            @rules(apply: ["sometimes", "required"])
+            @rulesForArray(apply: ["sometimes", "max:6"])
+    ): Blog
+        # @update(model: "App\\Models\\Blog")
+        @field(resolver: "Blog@update")
+        @guard
+        @can(ability: "update", model: "App\\Models\\Blog", query: true)
         @inject(context: "user.id", name: "user_id")
 }

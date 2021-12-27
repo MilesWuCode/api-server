@@ -15,6 +15,51 @@ use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
+/**
+ * App\Models\Blog
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property string|null $body
+ * @property bool $status
+ * @property \Illuminate\Support\Carbon|null $publish_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $love_reactant_id
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|Media[] $gallery
+ * @property-read int|null $gallery_count
+ * @property-read mixed $dislike_count
+ * @property-read mixed $like_count
+ * @property-read \Cog\Laravel\Love\Reactant\Models\Reactant|null $loveReactant
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|Media[] $media
+ * @property-read int|null $media_count
+ * @property \Illuminate\Database\Eloquent\Collection|\Spatie\Tags\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\BlogFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog joinReactionCounterOfType(string $reactionTypeName, ?string $alias = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog joinReactionTotal(?string $alias = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereLoveReactantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereNotReactedBy(\Cog\Contracts\Love\Reacterable\Models\Reacterable $reacterable, ?string $reactionTypeName = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog wherePublishAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereReactedBy(\Cog\Contracts\Love\Reacterable\Models\Reacterable $reacterable, ?string $reactionTypeName = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog withAllTags(\ArrayAccess|\Spatie\Tags\Tag|array $tags, ?string $type = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog withAllTagsOfAnyType($tags)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog withAnyTags(\ArrayAccess|\Spatie\Tags\Tag|array $tags, ?string $type = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Blog withAnyTagsOfAnyType($tags)
+ * @mixin \Eloquent
+ */
 class Blog extends Model implements HasMedia, ReactableInterface
 {
     use HasTags;
