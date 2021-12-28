@@ -42,7 +42,8 @@ extend type Query {
 extend type Mutation {
     createBlog(
         title: String! @rules(apply: ["required", "string", "max:100"])
-        body: String @rules(apply: ["sometimes", "required", "string", "max:100"])
+        body: String
+            @rules(apply: ["sometimes", "required", "string", "max:100"])
         tag: [String]
             @rules(apply: ["sometimes", "required"])
             @rulesForArray(apply: ["sometimes", "max:6"])
@@ -51,15 +52,18 @@ extend type Mutation {
             @rulesForArray(apply: ["sometimes", "max:10"])
     ): Blog
         # @create(model: "App\\Models\\Blog")
+        # 注入user_id
+        # @inject(context: "user.id", name: "user_id")
+
         @field(resolver: "Blog@create")
         @guard
         @can(ability: "create", model: "App\\Models\\Blog")
-        @inject(context: "user.id", name: "user_id")
 
     updateBlog(
         id: ID @eq
         title: String! @rules(apply: ["required", "string", "max:100"])
-        body: String @rules(apply: ["sometimes", "required", "string", "max:100"])
+        body: String
+            @rules(apply: ["sometimes", "required", "string", "max:100"])
         tag: [String]
             @rules(apply: ["sometimes", "required"])
             @rulesForArray(apply: ["sometimes", "max:6"])
@@ -68,5 +72,22 @@ extend type Mutation {
         @field(resolver: "Blog@update")
         @guard
         @can(ability: "update", model: "App\\Models\\Blog", query: true)
-        @inject(context: "user.id", name: "user_id")
+
+    addFileBlog(
+        id: ID @eq
+        collection: String! @rules(apply: ["required", "in:gallery"])
+        file: String! @rules(apply: ["required", "App\\Rules\\FileExist"])
+    ): Blog
+        @field(resolver: "Blog@addFile")
+        @guard
+        @can(ability: "update", model: "App\\Models\\Blog", query: true)
+
+    delFileBlog(
+        id: ID @eq
+        collection: String! @rules(apply: ["required", "in:gallery"])
+        media_id: Int! @rules(apply: ["required", "int" ])
+    ): Blog
+        @field(resolver: "Blog@delFile")
+        @guard
+        @can(ability: "update", model: "App\\Models\\Blog", query: true)
 }

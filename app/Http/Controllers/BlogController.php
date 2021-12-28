@@ -146,14 +146,28 @@ class BlogController extends Controller
      *
      * @param BlogFileDelRequest $request
      * @param Blog $blog
-     * @return Response
+     * @return JsonResponse
      */
-    public function fileDel(BlogFileDelRequest $request, Blog $blog): Response
+    public function fileDel(BlogFileDelRequest $request, Blog $blog): JsonResponse
     {
-        $mediaItems = $blog->getMedia($request->input('collection'));
+        // 配合 BlogFileDelRequest 檢查 media_id 是否存在於資料表
+        // $mediaItems = $blog->getMedia($request->input('collection'));
 
-        $mediaItem = $mediaItems->where('id', $request->input('media_id'))->first();
+        // $mediaItem = $mediaItems->find($request->input('media_id'));
 
-        return response($mediaItem->delete(), 200);
+        // if($mediaItem){
+        //     return response()->json(['message' => 'done']);
+        // }else{
+        //     return response()->json(['message' => 'media not found.'], 404);
+        // }
+
+        // 補捉model錯誤訊息
+        try {
+            $blog->delFile($request->input('collection'), $request->input('media_id'));
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
+        }
+
+        return response()->json(['message' => 'done']);
     }
 }

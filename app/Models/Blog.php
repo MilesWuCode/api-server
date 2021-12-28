@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
@@ -99,6 +98,8 @@ class Blog extends Model implements HasMedia, ReactableInterface
          * ->withResponsiveImages()
          */
 
+        // use Spatie\MediaLibrary\MediaCollections\File;
+
         $this->addMediaCollection('gallery')
         // ->acceptsFile(function (File $file) {
         //     return $file->mimeType === 'image/jpeg';
@@ -134,25 +135,34 @@ class Blog extends Model implements HasMedia, ReactableInterface
             ->where('collection_name', 'gallery');
     }
 
-    public function setTag(array $tag = [])
+    public function setTag(array $tag = []): void
     {
         $this->syncTagsWithType($tag, 'blog');
-
-        return $this;
     }
 
-    public function setFile(string $collection, array $files = [])
+    public function setFile(string $collection, array $files = []): void
     {
         foreach ($files as $file) {
             if (Storage::disk('temporary')->exists($file)) {
                 $this->addMediaFromDisk($file, 'temporary')->toMediaCollection($collection);
             }
         }
-
-        return $this;
     }
 
-    public function getLikeCountAttribute()
+    public function delFile(string $collection, int $media_id): void
+    {
+        $mediaItems = $this->getMedia($collection);
+
+        $mediaItem = $mediaItems->find($media_id);
+
+        if ($mediaItem) {
+            $mediaItem->delete();
+        } else {
+            throw new \Exception('media not found.');
+        }
+    }
+
+    public function getLikeCountAttribute(): int
     {
         // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
         return $this->viaLoveReactant()
@@ -160,7 +170,7 @@ class Blog extends Model implements HasMedia, ReactableInterface
             ->getCount();
     }
 
-    public function getDislikeCountAttribute()
+    public function getDislikeCountAttribute(): int
     {
         // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
         return $this->viaLoveReactant()
