@@ -1420,6 +1420,41 @@
 							"response": []
 						},
 						{
+							"name": "myBlog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query myBlog($id: ID!){\n  myBlog(id: $id) {\n    id\n    title\n    body\n    status\n    like_count\n    dislike_count\n    publish_at\n    created_at\n    updated_at\n    user {\n      id\n      name\n    }\n    tag {\n      data {\n        id\n        name\n      }\n    }\n    gallery {\n      data {\n        id\n        url\n      }\n    }\n  }\n}\n",
+										"variables": "{\n  \"id\": 240\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "myBlogs",
 							"request": {
 								"auth": {
