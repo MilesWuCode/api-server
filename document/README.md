@@ -27,6 +27,16 @@ php artisan vendor:publish --tag=lighthouse-schema
 
 # Configuration : config/lighthouse.php
 php artisan vendor:publish --tag=lighthouse-config
+
+# ide helper
+php artisan lighthouse:ide-helper
+```
+
+```ini
+# .gitignore
+_lighthouse_ide_helper.php
+programmatic-types.graphql
+schema-directives.graphql
 ```
 
 config/cors.php
@@ -163,8 +173,13 @@ php artisan make:model Todo -a --api --test
 ## barryvdh/laravel-ide-helper
 
 ```sh
+# install
 composer require --dev barryvdh/laravel-ide-helper
+
+#
 php artisan ide-helper:generate
+
+#
 php artisan ide-helper:models
 ```
 
