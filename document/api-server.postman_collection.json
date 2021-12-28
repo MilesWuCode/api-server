@@ -1105,7 +1105,7 @@
 										},
 										{
 											"key": "media_id",
-											"value": "8",
+											"value": "1",
 											"type": "text"
 										}
 									]
@@ -1171,7 +1171,7 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/Users/miles/Desktop/007/c5.jpg"
+											"src": "/Users/miles/Desktop/007/c2.jpg"
 										}
 									]
 								},
@@ -1509,6 +1509,76 @@
 									"graphql": {
 										"query": "mutation updateBlog($id: ID!, $title: String!, $body: String, $tag: [String!]) {\n  updateBlog(id: $id, title: $title, body: $body, tag: $tag) {\n    id\n    title\n    body\n    status\n    tag {\n      data {\n        id\n        name\n      }\n    }\n    gallery {\n      data {\n        id\n        url\n      }\n    }\n  }\n}\n",
 										"variables": "{\n  \"id\": 240,\n  \"title\": \"title try...\",\n  \"body\": \"body try...\",\n  \"tag\": [\"abc\", \"def\"]\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addFileBlog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation addFileBlog($id: ID!, $collection: String!, $file: String!) {\n  addFileBlog(id: $id, collection: $collection, file: $file) {\n    id\n    title\n    gallery {\n      data {\n        id\n        url\n      }\n    }\n  }\n}\n",
+										"variables": "{\n  \"id\": 240,\n  \"collection\": \"gallery\",\n  \"file\": \"{{temporary_file}}\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/graphql",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delFileBlog",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation delFileBlog($id: ID!, $collection: String!, $media_id: Int!) {\n  delFileBlog(id: $id, collection: $collection, media_id: $media_id) {\n    id\n    title\n    gallery {\n      data {\n        id\n        url\n      }\n    }\n  }\n}\n",
+										"variables": "{\n  \"id\": 240,\n  \"collection\": \"gallery\",\n  \"media_id\": 6\n}"
 									}
 								},
 								"url": {
