@@ -377,3 +377,11 @@ php artisan love:reaction-type-add --default
 php artisan db:seed --class=TestingSeeder
 composer dump-autoload
 ```
+
+## dev
+
+```sh
+php artisan lighthouse:ide-helper
+php artisan ide-helper:generate
+php artisan ide-helper:models
+```

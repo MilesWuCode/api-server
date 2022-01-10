@@ -59,6 +59,8 @@ use Spatie\Tags\HasTags;
  * @method static \Illuminate\Database\Eloquent\Builder|Blog withAnyTags(\ArrayAccess|\Spatie\Tags\Tag|array $tags, ?string $type = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Blog withAnyTagsOfAnyType($tags)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
  */
 class Blog extends Model implements HasMedia, ReactableInterface
 {
