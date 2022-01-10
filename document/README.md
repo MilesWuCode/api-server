@@ -167,7 +167,7 @@ export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 ## Make Model
 
 ```sh
-php artisan make:model Todo -a --api --test
+php artisan make:model Todo --all --api --test
 ```
 
 ## barryvdh/laravel-ide-helper
