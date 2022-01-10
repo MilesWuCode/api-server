@@ -32,14 +32,17 @@ Route::middleware('throttle:6,1')->post('/user/send-verify-email', [UserControll
 Route::post('/user/verify-email', [UserController::class, 'verifyEmail']);
 Route::middleware('auth:api')->get('/user', [UserController::class, 'show'])->name('user.show');
 Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+
 // TODO
 Route::middleware('auth:api')->apiResource('todo', TodoController::class);
 
 // Blog
 Route::middleware('auth:api')->apiResource('blog', BlogController::class);
+
 // Blog/id/file:add,del
 Route::middleware('auth:api')->post('blog/{blog}/file', [BlogController::class, 'fileAdd'])->name('blog.file.add');
 Route::middleware('auth:api')->delete('blog/{blog}/file', [BlogController::class, 'fileDel'])->name('blog.file.del');
+
 // Blog/id/comment:list,create
 Route::middleware('auth:api')->get('blog/{blog}/comment', [BlogController::class, 'comment'])->name('blog.comment.list');
 Route::middleware('auth:api')->post('blog/{blog}/comment', [BlogController::class, 'commentCreate'])->name('blog.comment.create');
