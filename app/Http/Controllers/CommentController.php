@@ -18,7 +18,7 @@ class CommentController extends Controller
     }
 
     /**
-     * reply list
+     * Comment or Reply list
      *
      * @param ListRequest $request
      * @param Comment $comment
@@ -42,7 +42,7 @@ class CommentController extends Controller
     }
 
     /**
-     * comment reply
+     * Create Reply
      *
      * @param CommentStoreRequest $request
      * @param Comment $comment
@@ -57,7 +57,7 @@ class CommentController extends Controller
     }
 
     /**
-     * display comment or reply
+     * Display Comment or Reply
      *
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\JsonResponse
@@ -69,7 +69,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Update comment or reply
+     * Update Comment or Reply
      *
      * @param  \App\Http\Requests\CommentUpdateRequest  $request
      * @param  \App\Models\Comment  $comment
@@ -84,7 +84,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove comment or reply
+     * Remove Comment or Reply
      *
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
