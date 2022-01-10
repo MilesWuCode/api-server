@@ -266,6 +266,21 @@ MEDIA_DISK=media
 composer require laravelista/comments
 ```
 
+## beyondcode/laravel-comments(wip)
+
+```sh
+# install
+composer require beyondcode/laravel-comments
+
+# migrate
+php artisan vendor:publish --provider="BeyondCode\Comments\CommentsServiceProvider" --tag="migrations"
+
+php artisan migrate
+
+# config
+php artisan vendor:publish --provider="BeyondCode\Comments\CommentsServiceProvider" --tag="config"
+```
+
 ## cybercog/laravel-love
 
 ```sh

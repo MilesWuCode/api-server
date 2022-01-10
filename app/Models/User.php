@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use Spatie\MediaLibrary\HasMedia;
-use Laravel\Passport\HasApiTokens;
 use App\Notifications\CustomVerifyEmail;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use BeyondCode\Comments\Contracts\Commentator;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
-use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * App\Models\User
@@ -62,7 +63,7 @@ use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements MustVerifyEmail, HasMedia, ReacterableInterface
+class User extends Authenticatable implements MustVerifyEmail, HasMedia, ReacterableInterface, Commentator
 {
     use HasApiTokens, HasFactory, Notifiable;
     use InteractsWithMedia;
@@ -181,5 +182,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Reacter
         } else {
             $reacterFacade->reactTo($reactant, $reactionType);
         }
+    }
+
+    /**
+     * Check if a comment for a specific model needs to be approved.
+     * @param mixed $model
+     * @return bool
+     */
+    public function needsCommentApproval($model): bool
+    {
+        return false;
     }
 }

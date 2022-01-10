@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "beyondcode/laravel-comments": "dev-master",
         "beyondcode/laravel-query-detector": "^1.5",
         "cybercog/laravel-love": "^8.8",
         "fruitcake/laravel-cors": "^2.0",

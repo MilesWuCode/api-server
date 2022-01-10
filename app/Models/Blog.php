@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use BeyondCode\Comments\Traits\HasComments;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,6 +63,7 @@ use Spatie\Tags\HasTags;
 class Blog extends Model implements HasMedia, ReactableInterface
 {
     use HasTags;
+    use HasComments;
     use HasFactory;
     use InteractsWithMedia;
     use Reactable;
