@@ -6,8 +6,11 @@ use App\Http\Requests\BlogFileAddRequest;
 use App\Http\Requests\BlogFileDelRequest;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
+use App\Http\Requests\CommentStoreRequest;
+use App\Http\Requests\ListRequest;
 use App\Models\Blog;
 use App\Transformers\BlogTransformer;
+use App\Transformers\CommentTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -169,5 +172,44 @@ class BlogController extends Controller
         }
 
         return response()->json(['message' => 'done']);
+    }
+
+    /**
+     * comments
+     *
+     * @param ListRequest $request
+     * @param Blog $blog
+     * @return JsonResponse
+     */
+    public function comments(ListRequest $request, Blog $blog): JsonResponse
+    {
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 5);
+        $sort = $request->input('sort', 'id_asc');
+
+        [$column, $order] = preg_split('/_(?=(asc|desc)$)/', $sort);
+
+        $comments = $blog->comments()
+            ->approved()
+            ->orderBy($column, $order)
+            ->paginate($limit, ['*'], 'page', $page);
+
+        return Fractal::create($comments, new CommentTransformer())
+            ->respond();
+    }
+
+    /**
+     * blog comment create
+     *
+     * @param CommentStoreRequest $request
+     * @param Blog $blog
+     * @return JsonResponse
+     */
+    public function commentCreate(CommentStoreRequest $request, Blog $blog): JsonResponse
+    {
+        $comment = $blog->comment($request->input('comment'));
+
+        return Fractal::create($comment, new CommentTransformer())
+            ->respond();
     }
 }

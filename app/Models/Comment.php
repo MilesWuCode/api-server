@@ -5,6 +5,7 @@ namespace App\Models;
 use BeyondCode\Comments\Comment as Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\Comment
@@ -39,8 +40,12 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
  * @mixin \Eloquent
+ * @property int|null $love_reactant_id
+ * @method static \Database\Factories\CommentFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereLoveReactantId($value)
  */
 class Comment extends Model implements ReactableInterface
 {
     use Reactable;
+    use HasFactory;
 }

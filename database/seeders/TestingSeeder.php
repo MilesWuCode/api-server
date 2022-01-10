@@ -17,6 +17,7 @@ class TestingSeeder extends Seeder
             UserSeeder::class,
             TodoSeeder::class,
             BlogSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }

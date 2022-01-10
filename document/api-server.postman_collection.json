@@ -1125,6 +1125,115 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Comment List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240/comment?page=1&limit=2&sort=updated_at_desc",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240",
+										"comment"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "updated_at_desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comment Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment",
+											"value": "test test 123",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240/comment",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240",
+										"comment"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1184,6 +1293,204 @@
 									"path": [
 										"api",
 										"file"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/comment/25?page=1&limit=2&sort=updated_at_desc",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"25"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "updated_at_desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment",
+											"value": "test test 123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/comment/25",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"25"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "test test 456",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/comment/3205",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"3205"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "DELETE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/comment/3",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"3"
 									]
 								}
 							},

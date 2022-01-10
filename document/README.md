@@ -121,7 +121,7 @@ php artisan tinker
 php artisan test --testsuite=Feature --stop-on-failure
 
 # run test
-sail php artisan test --filter test_create tests/Feature/Models/BlogTest.php
+php artisan test --filter test_create tests/Feature/Models/BlogTest.php
 
 # 可以直接使用.env.testing來執行測試
 cp .env .env.testing
@@ -294,14 +294,14 @@ php artisan migrate
 php artisan love:reaction-type-add --default
 
 # set model,migrate
-sail php artisan love:setup-reacterable --model="App\Models\User" --nullable
-sail php artisan migrate
-sail php artisan love:register-reacters --model="App\Models\User"
+php artisan love:setup-reacterable --model="App\Models\User" --nullable
+php artisan migrate
+php artisan love:register-reacters --model="App\Models\User"
 
 # set model,migrate
-sail php artisan love:setup-reactable --model="App\Models\Blog" --nullable
-sail php artisan migrate
-sail php artisan love:register-reactants --model="App\Models\Blog"
+php artisan love:setup-reactable --model="App\Models\Blog" --nullable
+php artisan migrate
+php artisan love:register-reactants --model="App\Models\Blog"
 ```
 
 ## sentry/sentry-laravel
@@ -384,4 +384,5 @@ composer dump-autoload
 php artisan lighthouse:ide-helper
 php artisan ide-helper:generate
 php artisan ide-helper:models
+composer dump-autoload
 ```
