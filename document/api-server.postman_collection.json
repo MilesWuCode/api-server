@@ -449,6 +449,42 @@
 							"response": []
 						},
 						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/todo/27",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"todo",
+										"27"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create",
 							"request": {
 								"auth": {
@@ -488,42 +524,6 @@
 									"path": [
 										"api",
 										"todo"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/todo/27",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"todo",
-										"27"
 									]
 								}
 							},
@@ -637,6 +637,292 @@
 					"name": "Blog",
 					"item": [
 						{
+							"name": "Comment",
+							"item": [
+								{
+									"name": "List",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{http}}://{{domain}}/api/blog/240/comment?page=1&limit=2&sort=updated_at_desc",
+											"protocol": "{{http}}",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"blog",
+												"240",
+												"comment"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "2"
+												},
+												{
+													"key": "sort",
+													"value": "updated_at_desc"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "comment",
+													"value": "test test 123",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{http}}://{{domain}}/api/blog/240/comment",
+											"protocol": "{{http}}",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"blog",
+												"240",
+												"comment"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Like",
+							"item": [
+								{
+									"name": "Update",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "_method",
+													"value": "PUT",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "Like",
+													"description": "Like,Dislike,empty",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{http}}://{{domain}}/api/blog/240/like",
+											"protocol": "{{http}}",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"blog",
+												"240",
+												"like"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "File",
+							"item": [
+								{
+									"name": "Delete",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "_method",
+													"value": "DELETE",
+													"type": "text"
+												},
+												{
+													"key": "collection",
+													"value": "gallery",
+													"type": "text"
+												},
+												{
+													"key": "media_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{http}}://{{domain}}/api/blog/240/file",
+											"protocol": "{{http}}",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"blog",
+												"240",
+												"file"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "collection",
+													"value": "gallery",
+													"type": "text"
+												},
+												{
+													"key": "file",
+													"value": "{{temporary_file}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{http}}://{{domain}}/api/blog/240/file",
+											"protocol": "{{http}}",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"blog",
+												"240",
+												"file"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "List",
 							"request": {
 								"auth": {
@@ -683,6 +969,48 @@
 										{
 											"key": "include",
 											"value": "tags"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "tags,gallery"
 										}
 									]
 								}
@@ -809,48 +1137,6 @@
 										{
 											"key": "include",
 											"value": "tag,gallery"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/289?include=tags,gallery",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"blog",
-										"289"
-									],
-									"query": [
-										{
-											"key": "include",
-											"value": "tags,gallery"
 										}
 									]
 								}
@@ -1016,224 +1302,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "File Add",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "collection",
-											"value": "gallery",
-											"type": "text"
-										},
-										{
-											"key": "file",
-											"value": "{{temporary_file}}",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/240/file",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"blog",
-										"240",
-										"file"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "File Del",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										},
-										{
-											"key": "collection",
-											"value": "gallery",
-											"type": "text"
-										},
-										{
-											"key": "media_id",
-											"value": "1",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/240/file",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"blog",
-										"240",
-										"file"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Comment List",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/240/comment?page=1&limit=2&sort=updated_at_desc",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"blog",
-										"240",
-										"comment"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
-										},
-										{
-											"key": "limit",
-											"value": "2"
-										},
-										{
-											"key": "sort",
-											"value": "updated_at_desc"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Comment Create",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "comment",
-											"value": "test test 123",
-											"type": "default"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{http}}://{{domain}}/api/blog/240/comment",
-									"protocol": "{{http}}",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"api",
-										"blog",
-										"240",
-										"comment"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -1347,6 +1415,48 @@
 										{
 											"key": "sort",
 											"value": "updated_at_desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/blog/240?include=tags,gallery",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"240"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "tags,gallery"
 										}
 									]
 								}
@@ -1491,6 +1601,59 @@
 										"api",
 										"comment",
 										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Like",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "Like",
+											"description": "Like,Dislike,empty",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/comment/240/like",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"240",
+										"like"
 									]
 								}
 							},
