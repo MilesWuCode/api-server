@@ -34,7 +34,5 @@ sail php artisan love:reaction-type-add --default
 sail php artisan queue:work
 
 # Testing
-sail php artisan db:seed --class=TestingSeeder
-
-sail composer dump-autoload
+sail php artisan test
 ```
