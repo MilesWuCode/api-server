@@ -62,6 +62,7 @@ use Spatie\Tags\HasTags;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
  * @property-read int|null $comments_count
+ * @property-read string $like
  */
 class Blog extends Model implements HasMedia, ReactableInterface
 {

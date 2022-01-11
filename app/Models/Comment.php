@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
 use BeyondCode\Comments\Comment as Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Comment
@@ -44,6 +44,9 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
  * @property int|null $love_reactant_id
  * @method static \Database\Factories\CommentFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereLoveReactantId($value)
+ * @property-read int $dislike_count
+ * @property-read string $like
+ * @property-read int $like_count
  */
 class Comment extends Model implements ReactableInterface
 {
