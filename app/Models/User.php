@@ -166,20 +166,20 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Reacter
         return $this->getFirstMediaUrl('avatar');
     }
 
-    // Toggle Like,Dislike
-    public function toggleLove($reactant, $reactionType)
+    // Like,Dislike,null
+    public function setLike($reactant, ?string $reactionType)
     {
         $reacterFacade = $this->viaLoveReacter();
 
-        $reverse = $reactionType === 'Like' ? 'Dislike' : 'Like';
+        $types = ['Like', 'Dislike'];
 
-        if ($reacterFacade->hasReactedTo($reactant, $reverse)) {
-            $reacterFacade->unreactTo($reactant, $reverse);
+        foreach ($types as $type) {
+            if ($type !== $reactionType && $reacterFacade->hasReactedTo($reactant, $type)) {
+                $reacterFacade->unreactTo($reactant, $type);
+            }
         }
 
-        if ($reacterFacade->hasReactedTo($reactant, $reactionType)) {
-            $reacterFacade->unreactTo($reactant, $reactionType);
-        } else {
+        if ($reactionType && $reacterFacade->hasNotReactedTo($reactant, $reactionType)) {
             $reacterFacade->reactTo($reactant, $reactionType);
         }
     }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -180,5 +181,17 @@ class Blog extends Model implements HasMedia, ReactableInterface
         return $this->viaLoveReactant()
             ->getReactionCounterOfType('Dislike')
             ->getCount();
+    }
+
+    public function getLikeAttribute(): string
+    {
+        // list n+1: ->with(['loveReactant.reactions'])
+        if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Like')) {
+            return 'Like';
+        } else if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Dislike')) {
+            return 'Dislike';
+        }
+
+        return '';
     }
 }

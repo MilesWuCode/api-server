@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use BeyondCode\Comments\Comment as Model;
-use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
-use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 
 /**
  * App\Models\Comment
@@ -48,4 +49,32 @@ class Comment extends Model implements ReactableInterface
 {
     use Reactable;
     use HasFactory;
+
+    public function getLikeCountAttribute(): int
+    {
+        // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
+        return $this->viaLoveReactant()
+            ->getReactionCounterOfType('Like')
+            ->getCount();
+    }
+
+    public function getDislikeCountAttribute(): int
+    {
+        // list n+1: ->with(['tags', 'loveReactant.reactionCounters', 'loveReactant.reactionTotal'])
+        return $this->viaLoveReactant()
+            ->getReactionCounterOfType('Dislike')
+            ->getCount();
+    }
+
+    public function getLikeAttribute(): string
+    {
+        // list n+1: ->with(['loveReactant.reactions'])
+        if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Like')) {
+            return 'Like';
+        } else if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Dislike')) {
+            return 'Dislike';
+        }
+
+        return '';
+    }
 }

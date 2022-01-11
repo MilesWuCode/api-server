@@ -37,6 +37,7 @@ class BlogTransformer extends TransformerAbstract
             'title' => $blog->title,
             'body' => $blog->body,
             'status' => (boolean) $blog->status,
+            'like' => $blog->like,
             'like_count' => (int) $blog->like_count,
             'dislike_count' => (int) $blog->dislike_count,
             'publish_at' => $blog->publish_at?->format('Y-m-d'),

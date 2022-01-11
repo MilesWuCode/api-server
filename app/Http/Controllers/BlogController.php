@@ -7,6 +7,7 @@ use App\Http\Requests\BlogFileDelRequest;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
 use App\Http\Requests\CommentStoreRequest;
+use App\Http\Requests\LikeRequest;
 use App\Http\Requests\ListRequest;
 use App\Models\Blog;
 use App\Transformers\BlogTransformer;
@@ -25,7 +26,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 列表
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
@@ -46,7 +47,7 @@ class BlogController extends Controller
 
         $blogs = $request->user()
             ->blogs()
-            ->with(['tags', 'loveReactant.reactionCounters'])
+            ->with(['tags', 'loveReactant.reactions', 'loveReactant.reactionCounters'])
             ->orderBy($column, $order)
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -58,7 +59,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新增
      *
      * @param  \App\Http\Requests\BlogStoreRequest  $request
      * @return \Illuminate\Http\JsonResponse
@@ -81,7 +82,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 單筆顯示
      *
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\JsonResponse
@@ -96,7 +97,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 更新
      *
      * @param  \App\Http\Requests\BlogUpdateRequest  $request
      * @param  \App\Models\Blog  $blog
@@ -118,7 +119,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 刪除
      *
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
@@ -129,7 +130,7 @@ class BlogController extends Controller
     }
 
     /**
-     * File add
+     * 檔案新增
      *
      * @param BlogFileAddRequest $request
      * @param Blog $blog
@@ -145,7 +146,7 @@ class BlogController extends Controller
     }
 
     /**
-     * File delete
+     * 檔案刪除
      *
      * @param BlogFileDelRequest $request
      * @param Blog $blog
@@ -175,7 +176,7 @@ class BlogController extends Controller
     }
 
     /**
-     * comments
+     * 評論列表
      *
      * @param ListRequest $request
      * @param Blog $blog
@@ -199,7 +200,7 @@ class BlogController extends Controller
     }
 
     /**
-     * blog comment create
+     * 評論新增
      *
      * @param CommentStoreRequest $request
      * @param Blog $blog
@@ -210,6 +211,30 @@ class BlogController extends Controller
         $comment = $blog->comment($request->input('comment'));
 
         return Fractal::create($comment, new CommentTransformer())
+            ->respond();
+    }
+
+    /**
+     * 設定喜歡或不喜歡
+     *
+     * @param LikeRequest $request
+     * @param Blog $blog
+     * @return void
+     */
+    public function like(LikeRequest $request, int $id): JsonResponse
+    {
+        // ? like_count,dislike_count數字不同步問題
+        // TODO:修改.env的QUEUE_CONNECTION=sync才會同步
+        // TODO:思考該不該顯示數字
+
+        $blog = Blog::with([
+            'loveReactant.reactions',
+        ])->find($id);
+
+        $request->user()
+            ->setLike($blog, $request->input('type', ''));
+
+        return Fractal::create($blog->fresh(), new BlogTransformer())
             ->respond();
     }
 }

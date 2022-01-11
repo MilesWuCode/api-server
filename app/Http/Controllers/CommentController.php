@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentStoreRequest;
 use App\Http\Requests\CommentUpdateRequest;
+use App\Http\Requests\LikeRequest;
 use App\Http\Requests\ListRequest;
 use App\Models\Comment;
 use App\Transformers\CommentTransformer;
@@ -92,5 +93,25 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         return response($comment->delete(), 200);
+    }
+
+    /**
+     * 設定喜歡或不喜歡
+     *
+     * @param LikeRequest $request
+     * @param Blog $blog
+     * @return void
+     */
+    public function like(LikeRequest $request, int $id): JsonResponse
+    {
+        $comment = Comment::with([
+            'loveReactant.reactions',
+        ])->find($id);
+
+        $request->user()
+            ->setLike($comment, $request->input('type', ''));
+
+        return Fractal::create($comment->fresh(), new CommentTransformer())
+            ->respond();
     }
 }

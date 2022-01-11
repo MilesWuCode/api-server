@@ -42,6 +42,7 @@ class CommentTransformer extends TransformerAbstract
 
             'is_approved' => (boolean) $comment->is_approved,
 
+            'like' => $comment->like,
             'like_count' => (int) $comment->like_count,
             'dislike_count' => (int) $comment->dislike_count,
 

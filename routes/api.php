@@ -33,34 +33,40 @@ Route::post('/user/verify-email', [UserController::class, 'verifyEmail']);
 Route::middleware('auth:api')->get('/user', [UserController::class, 'show'])->name('user.show');
 Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 
-// TODO
+// Todo:CRUD
 Route::middleware('auth:api')->apiResource('todo', TodoController::class);
 
-// Blog
+// Blog:CRUD
 Route::middleware('auth:api')->apiResource('blog', BlogController::class);
 
-// Blog/id/file:add,del
-Route::middleware('auth:api')->post('blog/{blog}/file', [BlogController::class, 'fileAdd'])->name('blog.file.add');
-Route::middleware('auth:api')->delete('blog/{blog}/file', [BlogController::class, 'fileDel'])->name('blog.file.del');
+// Blog:/id/file
+Route::middleware('auth:api')->post('/blog/{blog}/file', [BlogController::class, 'fileAdd'])->name('blog.file.add');
+Route::middleware('auth:api')->delete('/blog/{blog}/file', [BlogController::class, 'fileDel'])->name('blog.file.del');
 
-// Blog/id/comment:list,create
-Route::middleware('auth:api')->get('blog/{blog}/comment', [BlogController::class, 'comment'])->name('blog.comment.list');
-Route::middleware('auth:api')->post('blog/{blog}/comment', [BlogController::class, 'commentCreate'])->name('blog.comment.create');
+// Blog-Comment:list,create
+Route::middleware('auth:api')->get('/blog/{blog}/comment', [BlogController::class, 'comment'])->name('blog.comment.list');
+Route::middleware('auth:api')->post('/blog/{blog}/comment', [BlogController::class, 'commentCreate'])->name('blog.comment.create');
 
-// Comment or Reply
-Route::middleware('auth:api')->get('comment/{comment}', [CommentController::class, 'index'])->name('comment.list');
-Route::middleware('auth:api')->post('comment/{comment}', [CommentController::class, 'store'])->name('comment.store');
-Route::middleware('auth:api')->put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
-Route::middleware('auth:api')->delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+// Blog:/id/like
+Route::middleware('auth:api')->put('/blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
+
+// Comment(Reply):CRUD
+Route::middleware('auth:api')->get('/comment/{comment}', [CommentController::class, 'index'])->name('comment.list');
+Route::middleware('auth:api')->post('/comment/{comment}', [CommentController::class, 'store'])->name('comment.store');
+Route::middleware('auth:api')->put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+Route::middleware('auth:api')->delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+// Comment(Reply):/id/like
+Route::middleware('auth:api')->put('/comment/{comment}/like', [CommentController::class, 'like'])->name('comment.like');
 
 // PUBLIC
 // Route::group(function () {
-//     //
+// ...
 // });
 
 // PRiVATE
 // Route::middleware(['auth:api'])->group(function () {
-//     //
+// ...
 // });
 
 // Temporary File
