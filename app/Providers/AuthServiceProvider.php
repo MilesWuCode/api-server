@@ -35,6 +35,11 @@ class AuthServiceProvider extends ServiceProvider
             Passport::routes();
         }
 
+        // * example
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+
         // 更改驗證信方法2
         if (false) {
             VerifyEmail::createUrlUsing(function ($notifiable) {

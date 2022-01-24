@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::post('/user/register', [UserController::class, 'register'])->name('user.r
 Route::middleware('throttle:6,1')->post('/user/send-verify-email', [UserController::class, 'sendVerifyEmail']);
 Route::post('/user/verify-email', [UserController::class, 'verifyEmail']);
 Route::middleware('auth:api')->get('/user', [UserController::class, 'show'])->name('user.show');
+Route::middleware('auth:api')->post('/user', [UserController::class, 'update'])->name('user.update');
 Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 
 // Todo:CRUD
@@ -59,15 +61,18 @@ Route::middleware('auth:api')->delete('/comment/{comment}', [CommentController::
 // Comment(Reply):/id/like
 Route::middleware('auth:api')->put('/comment/{comment}/like', [CommentController::class, 'like'])->name('comment.like');
 
-// PUBLIC
+// * example
 // Route::group(function () {
 // ...
 // });
 
-// PRiVATE
+// * example:access token
 // Route::middleware(['auth:api'])->group(function () {
 // ...
 // });
 
 // Temporary File
 Route::middleware('auth:api')->post('/file', [FileController::class, 'file'])->name('temporary.file.upload');
+
+// Socialite singin
+Route::post('/socialite/singin', [SocialiteController::class, 'singin']);

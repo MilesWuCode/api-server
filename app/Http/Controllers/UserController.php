@@ -126,6 +126,20 @@ class UserController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $request->user()->update($request->all());
+
+        return Fractal::create($request->user(), new UserTransformer())
+            ->respond();
+    }
+
+    /**
      * Logout.
      *
      * @param  \Illuminate\Http\Request  $request

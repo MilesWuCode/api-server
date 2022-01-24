@@ -82,6 +82,11 @@ app/Providers/AuthServiceProvider.php
 +       if (! $this->app->routesAreCached()) {
 +           Passport::routes();
 +       }
+
++       // * example
++       Passport::tokensExpireIn(now()->addDays(15));
++       Passport::refreshTokensExpireIn(now()->addDays(30));
++       Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 ```
 
@@ -357,6 +362,12 @@ composer require spatie/eloquent-sortable
 ```
 
 ## swooletw/laravel-swoole(wip)
+
+## laravel/socialite
+
+```sh
+composer require laravel/socialite
+```
 
 ## wip
 
