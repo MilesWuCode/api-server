@@ -2,116 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Spatie\Fractal\Facades\Fractal;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserUpdateRequest;
 use App\Transformers\UserTransformer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Fractal\Facades\Fractal;
 
 class UserController extends Controller
 {
-    /**
-     * User register.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
-            'comfirm_password' => 'required|same:password',
-        ])->validate();
-
-        $input = $request->all();
-
-        $input['password'] = Hash::make($input['password']);
-
-        $user = User::create($input);
-
-        if (!$user->hasVerifiedEmail()) {
-            $user->sendEmailVerificationNotification();
-        }
-
-        return response()->json($user->toArray(), 200);
-    }
-
-    /**
-     * send verify email.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function sendVerifyEmail(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-        ])->validate();
-
-        $email = $request->email;
-
-        $user = User::where('email', $email)->first();
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'email not found',
-                'errors' => [
-                    'email' => 'not found',
-                ],
-            ], 422);
-        }
-
-        if ($user->hasVerifiedEmail()) {
-            abort(400, 'Email already verified.');
-        } else {
-            $user->sendEmailVerificationNotification();
-        }
-
-        return response()->json($user->toArray(), 200);
-    }
-
-    /**
-     * verify email.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function verifyEmail(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-            'hash' => 'required',
-            'expires' => 'required',
-        ])->validate();
-
-        $user = User::find($request->id);
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'email not found',
-                'errors' => [
-                    'email' => 'not found',
-                ],
-            ], 422);
-        }
-
-        if (!hash_equals((string) $request->hash, sha1($user->getEmailForVerification()))) {
-            abort(401, 'Unauthorized');
-        }
-
-        if (!$user->hasVerifiedEmail()) {
-            $user->markEmailAsVerified();
-
-            event(new Verified($user));
-        }
-
-        return response()->json($user->toArray(), 200);
-    }
-
     /**
      * Display the specified resource.
      *
@@ -126,27 +26,43 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param UserUpdateRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request): JsonResponse
     {
-        $request->user()->update($request->all());
+        // * example
+        // dump($request->validated());
+        // dump($request->safe()->only(['name']));
+        // dump($request->safe()->except(['other']));
+        // dump($request->safe()->all());
+
+        $request->user()->update($request->validated());
 
         return Fractal::create($request->user(), new UserTransformer())
             ->respond();
     }
 
     /**
-     * Logout.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function changePassword(Request $request): JsonResponse
     {
-        return $request->user()->token()->revoke();
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:8',
+            'comfirm_password' => 'required|same:password',
+        ])->validate();
+
+        $password = Hash::make($validator['password']);
+
+        $request->user()->update(['password' => $password]);
+
+        return Fractal::create($request->user(), new UserTransformer())
+            ->respond();
     }
 }

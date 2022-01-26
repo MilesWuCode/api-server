@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileController;
@@ -27,13 +28,16 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// AUTH
-Route::post('/user/register', [UserController::class, 'register'])->name('user.register');
-Route::middleware('throttle:6,1')->post('/user/send-verify-email', [UserController::class, 'sendVerifyEmail']);
-Route::post('/user/verify-email', [UserController::class, 'verifyEmail']);
+// Auth
+Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
+Route::middleware('throttle:6,1')->post('/auth/send-verify-email', [AuthController::class, 'sendVerifyEmail']);
+Route::post('/auth/verify-email', [AuthController::class, 'verifyEmail']);
+Route::middleware('auth:api')->post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+// User
 Route::middleware('auth:api')->get('/user', [UserController::class, 'show'])->name('user.show');
-Route::middleware('auth:api')->post('/user', [UserController::class, 'update'])->name('user.update');
-Route::middleware('auth:api')->post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+Route::middleware('auth:api')->put('/user', [UserController::class, 'update'])->name('user.update');
+Route::middleware('auth:api')->put('/user/change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
 
 // Todo:CRUD
 Route::middleware('auth:api')->apiResource('todo', TodoController::class);

@@ -62,14 +62,14 @@
 									]
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/user/register",
+									"raw": "{{http}}://{{domain}}/api/auth/register",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
 										"api",
-										"user",
+										"auth",
 										"register"
 									]
 								}
@@ -101,14 +101,14 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/user/send-verify-email",
+									"raw": "http://localhost/api/auth/send-verify-email",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"user",
+										"auth",
 										"send-verify-email"
 									]
 								}
@@ -150,14 +150,14 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/user/verify-email",
+									"raw": "http://localhost/api/auth/verify-email",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"user",
+										"auth",
 										"verify-email"
 									]
 								}
@@ -165,7 +165,7 @@
 							"response": []
 						},
 						{
-							"name": "Access Token (登入)",
+							"name": "Access Token(登入)",
 							"event": [
 								{
 									"listen": "test",
@@ -320,7 +320,113 @@
 							"response": []
 						},
 						{
-							"name": "會員資料",
+							"name": "登出",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/auth/logout",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "第三方SingIn(登入/註冊)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const {token_type, access_token, refresh_token} = JSON.parse(responseBody);",
+											"",
+											"postman.setEnvironmentVariable('token_type', token_type);",
+											"",
+											"postman.setEnvironmentVariable('access_token', access_token);",
+											"",
+											"postman.setEnvironmentVariable('refresh_token', refresh_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "driver",
+											"value": "google",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": " ya29.A0ARrdaM_LENUOcWsqdmiCd7yBZ4Dbd50md7IWsvZGsZs3Argf7BIE6XhJONYqEFiFUdxxkD5rYWU15x8qH3jeaIr3tELgr_TJ6Qwx-yjep_wPOIPvbIwdcS63TbVNElabPyadzxEYQD92l9cYnT-TOKV0eTg_XQ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/socialite/singin",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"socialite",
+										"singin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Me",
+					"item": [
+						{
+							"name": "Get",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -355,7 +461,7 @@
 							"response": []
 						},
 						{
-							"name": "登出",
+							"name": "Update",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -377,10 +483,81 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": []
+									"formdata": [
+										{
+											"key": "name",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "error test",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/user/logout",
+									"raw": "{{http}}://{{domain}}/api/user",
+									"protocol": "{{http}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Change",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "testtest",
+											"type": "text"
+										},
+										{
+											"key": "comfirm_password",
+											"value": "testtest",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{http}}://{{domain}}/api/user/change-password",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -388,7 +565,7 @@
 									"path": [
 										"api",
 										"user",
-										"logout"
+										"change-password"
 									]
 								}
 							},
@@ -1309,7 +1486,7 @@
 					"name": "File",
 					"item": [
 						{
-							"name": "File Upload To Temporary",
+							"name": "File Upload(暫存區)",
 							"event": [
 								{
 									"listen": "test",
