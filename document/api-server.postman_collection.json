@@ -473,7 +473,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -482,8 +482,8 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
+									"mode": "urlencoded",
+									"urlencoded": [
 										{
 											"key": "name",
 											"value": "test",
@@ -492,11 +492,6 @@
 										{
 											"key": "email",
 											"value": "error test",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "PUT",
 											"type": "text"
 										}
 									]
@@ -528,7 +523,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -538,23 +533,7 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "password",
-											"value": "testtest",
-											"type": "text"
-										},
-										{
-											"key": "comfirm_password",
-											"value": "testtest",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "PUT",
-											"type": "text"
-										}
-									]
+									"formdata": []
 								},
 								"url": {
 									"raw": "{{http}}://{{domain}}/api/user/change-password",
@@ -719,7 +698,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -728,8 +707,8 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
+									"mode": "urlencoded",
+									"urlencoded": [
 										{
 											"key": "content",
 											"value": "test",
@@ -738,11 +717,6 @@
 										{
 											"key": "active",
 											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "_method",
-											"value": "PUT",
 											"type": "text"
 										}
 									]
@@ -775,7 +749,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Accept",
@@ -785,16 +759,10 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										}
-									]
+									"formdata": []
 								},
 								"url": {
-									"raw": "{{http}}://{{domain}}/api/todo/19",
+									"raw": "{{http}}://{{domain}}/api/todo/573",
 									"protocol": "{{http}}",
 									"host": [
 										"{{domain}}"
@@ -802,7 +770,7 @@
 									"path": [
 										"api",
 										"todo",
-										"19"
+										"573"
 									]
 								}
 							},
@@ -943,7 +911,7 @@
 												}
 											]
 										},
-										"method": "POST",
+										"method": "PUT",
 										"header": [
 											{
 												"key": "Accept",
@@ -952,17 +920,12 @@
 											}
 										],
 										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "_method",
-													"value": "PUT",
-													"type": "text"
-												},
+											"mode": "urlencoded",
+											"urlencoded": [
 												{
 													"key": "type",
 													"value": "Like",
-													"description": "Like,Dislike,empty",
+													"description": "Like / Dislike / null",
 													"type": "text"
 												}
 											]
@@ -1333,7 +1296,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -1342,13 +1305,8 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "PUT",
-											"type": "text"
-										},
+									"mode": "urlencoded",
+									"urlencoded": [
 										{
 											"key": "title",
 											"value": "abcdefg",
@@ -1372,7 +1330,6 @@
 										{
 											"key": "tags",
 											"value": "",
-											"description": "空值清空用",
 											"type": "text",
 											"disabled": true
 										},
@@ -1407,7 +1364,6 @@
 										{
 											"key": "tags[5]",
 											"value": "f6",
-											"description": "最多5個",
 											"type": "text",
 											"disabled": true
 										}
@@ -1447,7 +1403,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Accept",
@@ -1457,13 +1413,7 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										}
-									]
+									"formdata": []
 								},
 								"url": {
 									"raw": "{{http}}://{{domain}}/api/blog/201",
@@ -1699,7 +1649,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -1708,13 +1658,8 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "PUT",
-											"type": "text"
-										},
+									"mode": "urlencoded",
+									"urlencoded": [
 										{
 											"key": "comment",
 											"value": "test test 456",
@@ -1750,7 +1695,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Accept",
@@ -1760,13 +1705,7 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "DELETE",
-											"type": "text"
-										}
-									]
+									"formdata": []
 								},
 								"url": {
 									"raw": "{{http}}://{{domain}}/api/comment/3",
@@ -1796,7 +1735,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Accept",
@@ -1805,17 +1744,12 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "_method",
-											"value": "PUT",
-											"type": "text"
-										},
+									"mode": "urlencoded",
+									"urlencoded": [
 										{
 											"key": "type",
 											"value": "Like",
-											"description": "Like,Dislike,empty",
+											"description": "Like / Dislike / null",
 											"type": "text"
 										}
 									]
