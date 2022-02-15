@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,3 +81,14 @@ Route::middleware('auth:api')->post('/file', [FileController::class, 'file'])->n
 
 // Socialite singin
 Route::post('/socialite/singin', [SocialiteController::class, 'singin']);
+
+// Demo
+Route::post('/demo-upload', function (Request $request) {
+    $file = $request->file('file');
+
+    return [
+        'name' => $file->getClientOriginalName(),
+        'type' => $file->getClientMimeType(),
+        'size' => $file->getSize(),
+    ];
+});
