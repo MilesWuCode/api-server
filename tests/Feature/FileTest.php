@@ -16,7 +16,7 @@ class FileTest extends TestCase
      */
     public function test_upload()
     {
-        $response = $this->json('POST', '/api/demo-upload', [
+        $response = $this->json('POST', '/api/demo/upload', [
             'file' => UploadedFile::fake()->image('test.jpg')->size(600)
         ]);
 

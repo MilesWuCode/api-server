@@ -83,7 +83,7 @@ Route::middleware('auth:api')->post('/file', [FileController::class, 'file'])->n
 Route::post('/socialite/singin', [SocialiteController::class, 'singin']);
 
 // Demo
-Route::post('/demo-upload', function (Request $request) {
+Route::post('/demo/upload', function (Request $request) {
     $file = $request->file('file');
 
     return [
