@@ -379,6 +379,9 @@ composer global require friendsofphp/php-cs-fixer
 # composer加到PATH
 export PATH=~/.composer/vendor/bin:$PATH
 
+# 專案
+composer require --dev squizlabs/php_codesniffer
+
 # 版本
 phpcs --version
 phpcbf --version
