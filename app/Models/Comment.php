@@ -74,7 +74,7 @@ class Comment extends Model implements ReactableInterface
         // list n+1: ->with(['loveReactant.reactions'])
         if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Like')) {
             return 'Like';
-        } else if (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Dislike')) {
+        } elseif (Auth::check() && $this->viaLoveReactant()->isReactedBy(Auth::user(), 'Dislike')) {
             return 'Dislike';
         }
 

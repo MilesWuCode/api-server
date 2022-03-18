@@ -369,6 +369,24 @@ composer require spatie/eloquent-sortable
 composer require laravel/socialite
 ```
 
+## phpcs
+
+```sh
+# 安裝
+composer global require "squizlabs/php_codesniffer=*"
+composer global require friendsofphp/php-cs-fixer
+
+# composer加到PATH
+export PATH=~/.composer/vendor/bin:$PATH
+
+# 版本
+phpcs --version
+phpcbf --version
+
+# 執行測試
+phpcs --standard=PSR2 --exclude=Generic.Files.LineLength --extensions=php app
+```
+
 ## wip
 
 -   user avatar, default value

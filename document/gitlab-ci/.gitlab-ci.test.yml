@@ -1,0 +1,24 @@
+image: lorisleiva/laravel-docker:latest
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/
+
+codestyle:
+  stage: test
+  cache: {}
+  script:
+    - phpcs --standard=PSR2 --exclude=Generic.Files.LineLength --extensions=php app
+
+phpunit:
+  stage: test
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.testing .env
+    - php artisan key:generate
+    - php artisan config:cache
+    - php artisan migrate
+    - php artisan passport:install
+    - php artisan love:reaction-type-add --default
+    - phpunit --coverage-text --colors=never
