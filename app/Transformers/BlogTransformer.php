@@ -12,7 +12,7 @@ class BlogTransformer extends TransformerAbstract
      *
      * @var array
      */
-    protected $defaultIncludes = [
+    protected array $defaultIncludes = [
         //
     ];
 
@@ -21,7 +21,7 @@ class BlogTransformer extends TransformerAbstract
      *
      * @var array
      */
-    protected $availableIncludes = [
+    protected array $availableIncludes = [
         'tag', 'gallery',
     ];
 
