@@ -373,7 +373,7 @@ composer require laravel/socialite
 
 ```sh
 # 安裝
-composer global require "squizlabs/php_codesniffer=*"
+composer global require squizlabs/php_codesniffer
 composer global require friendsofphp/php-cs-fixer
 
 # composer加到PATH

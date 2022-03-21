@@ -41,6 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         // 更改驗證信方法2
+        // 不想用createUrlUsing，可用驗證信方法1
         if (false) {
             VerifyEmail::createUrlUsing(function ($notifiable) {
                 $query = http_build_query([
@@ -54,6 +55,7 @@ class AuthServiceProvider extends ServiceProvider
         }
 
         // 更改驗證信方法3
+        // 不想用createUrlUsing，可用驗證信方法1
         if (false) {
             VerifyEmail::createUrlUsing(function ($notifiable) {
                 $verifyUrl = URL::temporarySignedRoute(

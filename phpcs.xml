@@ -13,9 +13,8 @@
   <arg value="ns"/>
 
   <!-- Use PSR-12 as a base -->
-  <rule ref="PSR2"/>
-
-  <rule ref="Generic.Files.LineLength.TooLong">
-      <severity>0</severity>
+  <rule ref="PSR2">
+    <exclude name="Generic.Files.LineLength.TooLong"/>
+    <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
   </rule>
 </ruleset>

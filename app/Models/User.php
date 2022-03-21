@@ -63,6 +63,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Verify[] $verifies
+ * @property-read int|null $verifies_count
  */
 class User extends Authenticatable implements MustVerifyEmail, HasMedia, ReacterableInterface, Commentator
 {
@@ -121,6 +123,19 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Reacter
     public function sendEmailVerificationNotification()
     {
         $this->notify(new CustomVerifyEmail);
+    }
+
+    public function verifies(): HasMany
+    {
+        return $this->hasMany(Verify::class);
+    }
+
+    public function verifyCode(string $code): bool
+    {
+        return $this->verifies
+            ->where('code', $code)
+            ->where('expires', '>=', now())
+            ->count() === 1;
     }
 
     public function todos(): HasMany

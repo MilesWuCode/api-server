@@ -101,10 +101,10 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/auth/send-verify-email",
-									"protocol": "http",
+									"raw": "{{http}}://{{domain}}/api/auth/send-verify-email",
+									"protocol": "{{http}}",
 									"host": [
-										"localhost"
+										"{{domain}}"
 									],
 									"path": [
 										"api",
@@ -134,7 +134,7 @@
 									"formdata": [
 										{
 											"key": "id",
-											"value": "1",
+											"value": "11",
 											"type": "text"
 										},
 										{
@@ -144,16 +144,21 @@
 										},
 										{
 											"key": "expires",
-											"value": "1637649815",
+											"value": "1647596574",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "348033",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost/api/auth/verify-email",
-									"protocol": "http",
+									"raw": "{{http}}://{{domain}}/api/auth/verify-email",
+									"protocol": "{{http}}",
 									"host": [
-										"localhost"
+										"{{domain}}"
 									],
 									"path": [
 										"api",
@@ -2053,7 +2058,7 @@
 								"body": {
 									"mode": "graphql",
 									"graphql": {
-										"query": "query myBlogs(\n  $first: Int!\n  $page: Int\n  $column: QueryMyBlogsOrderByColumn!\n  $order: SortOrder!\n) {\n  myBlogs(\n    first: $first\n    page: $page\n    orderBy: { column: $column, order: $order }\n  ) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      currentPage\n      lastPage\n    }\n  }\n}\n",
+										"query": "query myBlogs(\n  $first: Int!\n  $page: Int\n  $column: QueryMyBlogsOrderByColumn!\n  $order: SortOrder!\n) {\n  myBlogs(\n    first: $first\n    page: $page\n    orderBy: { column: $column, order: $order }\n  ) {\n    data {\n      id\n      title\n      body\n      status\n      like_count\n      dislike_count\n      publish_at\n      created_at\n      updated_at\n      user {\n        id\n        name\n      }\n      tag {\n        data {\n          id\n          name\n        }\n      }\n      gallery {\n        data {\n          id\n          url\n        }\n      }\n    }\n    paginatorInfo {\n      count\n      currentPage\n      firstItem\n      hasMorePages\n      lastItem\n      lastPage\n      perPage\n      total\n    }\n  }\n}\n",
 										"variables": "{\n  \"first\": 3,\n  \"page\": 1,\n  \"column\": \"CREATED_AT\",\n  \"order\": \"ASC\"\n}"
 									}
 								},

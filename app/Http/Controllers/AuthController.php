@@ -84,6 +84,8 @@ class AuthController extends Controller
             'id' => 'required',
             'hash' => 'required',
             'expires' => 'required',
+            // 自定義
+            'code' => 'required',
         ])->validate();
 
         $user = User::find($request->id);
@@ -98,6 +100,10 @@ class AuthController extends Controller
         }
 
         if (!hash_equals((string) $request->hash, sha1($user->getEmailForVerification()))) {
+            abort(401, 'Unauthorized');
+        }
+
+        if (!$user->verifyCode((string) $request->code)) {
             abort(401, 'Unauthorized');
         }
 
