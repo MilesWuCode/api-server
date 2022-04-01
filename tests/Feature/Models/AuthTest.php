@@ -63,10 +63,17 @@ final class AuthTest extends TestCase
 
         $user->save();
 
+        $this->postJson('/api/auth/send-verify-email', [
+            'email' => $user->email,
+        ]);
+
+        $user->verifies->last()->code;
+
         $response = $this->postJson('/api/auth/verify-email', [
             'id' => $user->id,
             'hash' => sha1($user->email),
             'expires' => Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60))->getTimestamp(),
+            'code' => $user->verifies->last()->code
         ]);
 
         $response->assertStatus(200);
