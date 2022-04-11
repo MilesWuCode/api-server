@@ -1,5 +1,14 @@
+"""
+Blog type is ...
+"""
 type Blog {
+    """
+    id is ...
+    """
     id: ID!
+    """
+    title is ...
+    """
     title: String!
     body: String
     status: Boolean!
@@ -25,6 +34,9 @@ type Blog {
 }
 
 extend type Query {
+    """
+    blog query is ...
+    """
     blog(id: ID @eq): Blog @find
 
     blogs(orderBy: _ @orderBy(columns: ["id", "created_at"])): [Blog!]!
@@ -85,7 +97,7 @@ extend type Mutation {
     delFileBlog(
         id: ID @eq
         collection: String! @rules(apply: ["required", "in:gallery"])
-        media_id: Int! @rules(apply: ["required", "int" ])
+        media_id: Int! @rules(apply: ["required", "int"])
     ): Blog
         @field(resolver: "Blog@delFile")
         @guard
