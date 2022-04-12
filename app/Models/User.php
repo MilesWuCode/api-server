@@ -132,7 +132,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Reacter
 
     public function verifyCode(string $code): bool
     {
-        return $this->verifies
+        return $this->verifies()
             ->where('code', $code)
             ->where('expires', '>=', now())
             ->count() === 1;

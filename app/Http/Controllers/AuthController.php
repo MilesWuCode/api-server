@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
@@ -32,7 +33,7 @@ class AuthController extends Controller
         $user = User::create($input);
 
         if (!$user->hasVerifiedEmail()) {
-            $user->sendEmailVerificationNotification();
+            event(new Registered($user));
         }
 
         return response()->json($user->toArray(), 200);
@@ -46,7 +47,7 @@ class AuthController extends Controller
      */
     public function sendVerifyEmail(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'email' => 'required|email',
         ])->validate();
 
@@ -80,7 +81,7 @@ class AuthController extends Controller
      */
     public function verifyEmail(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'id' => 'required',
             'hash' => 'required',
             'expires' => 'required',
@@ -88,16 +89,7 @@ class AuthController extends Controller
             'code' => 'required',
         ])->validate();
 
-        $user = User::find($request->id);
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'email not found',
-                'errors' => [
-                    'email' => 'not found',
-                ],
-            ], 422);
-        }
+        $user = User::findOrFail($request->id);
 
         if (!hash_equals((string) $request->hash, sha1($user->getEmailForVerification()))) {
             abort(401, 'Unauthorized');
