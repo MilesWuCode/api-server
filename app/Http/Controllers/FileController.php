@@ -10,7 +10,7 @@ class FileController extends Controller
     /**
      * Post File
      *
-     * @param  \App\Http\Requests\FileBlogRequest  $request
+     * @param  \App\Http\Requests\FileRequest  $request
      */
     public function file(FileRequest $request)
     {
